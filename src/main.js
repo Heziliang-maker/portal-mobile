@@ -17,7 +17,6 @@ import "normalize.css";
 // =>引入rem flexible
 // rem插件
 import "amfe-flexible";
-import "amfe-flexible/index.js";
 // =>引入 icon/*.svg 注册函数
 import installSvgIcons from "./icons";
 // =>引入 vant 注册函数

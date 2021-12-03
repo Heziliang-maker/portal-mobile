@@ -14,7 +14,7 @@
     "core-js": "^3.6.5",
     "less-loader": "^7.1.0",
     "normalize.css": "^8.0.1",
-    "postcss-pxtorem": "^6.0.0",
+    "postcss-pxtorem": "^5.1.1",
     "sass-resources-loader": "^2.2.4",
     "vant": "^3.3.5",
     "vue": "^3.0.0",
