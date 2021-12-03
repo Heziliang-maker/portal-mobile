@@ -1,6 +1,9 @@
 <!--
  * @Date: 2021-12-03
- * @Description: 
+ * @Description:
+ *  scrollList 数据列表 
+ *  targetClass 列表单元的类名
+ *  scrollTo 滚动方法
 -->
 <template>
   <div class="container">
@@ -9,51 +12,69 @@
       ref="wrapperRef"
     >
       <div class="container-box">
-        <slot>
-          <div class="container-box-item">
-            1
-          </div>
-          <div class="container-box-item">
-            1
-          </div>
-          <div class="container-box-item">
-            1
-          </div>
-          <div class="container-box-item">
-            1
-          </div>
-        </slot>
+
+        <div
+          class="container-box-item"
+          :class="targetClass"
+          v-for="item in scrollList"
+        >
+          <slot
+            name="content"
+            :item="item"
+          ></slot>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, ref, onMounted, nextTick, onBeforeUnmount } from "vue";
+import { reactive, watch, toRefs, ref, onMounted, nextTick, onBeforeUnmount } from "vue";
 import BScroll from "@better-scroll/core";
 export default {
     name: "BetterScrollView",
-    setup() {
+    props: {
+        scrollList: {
+            type: Array,
+            required: true
+        },
+        targetClass: {
+            type: String
+        }
+    },
+    setup(props) {
         const wrapperRef = ref(null);
         const state = reactive({
             bs: null
         });
-        onMounted(() => {
-            const wrapper = wrapperRef.value;
-            state.bs = new BScroll(wrapper, {
-                scrollX: true,
-                probeType: 3,
-                bounce: true,
-                eventPassthrough: "vertical"
-            });
-        });
+
+        const scrollTo = async (index) => {
+            state.bs.refresh();
+            await nextTick();
+            state.bs.scrollTo(index);
+        };
 
         onBeforeUnmount(() => {
             state.bs.destroy();
         });
 
+        watch(
+            () => props.scrollList,
+            async (newValue, oldValue) => {
+                await nextTick();
+                const wrapper = wrapperRef.value;
+                state.bs = new BScroll(wrapper, {
+                    scrollX: true,
+                    probeType: 3,
+                    bounce: true,
+                    eventPassthrough: "vertical"
+                });
+            }
+        );
+
         return {
             wrapperRef,
+            scrollTo,
             ...toRefs(state)
         };
     }
@@ -72,11 +93,8 @@ export default {
             display: inline-block;
 
             .container-box-item {
-                width: 167px;
-                height: 167px;
-                display: inline-block;
-                font-size: 0;
-                vertical-align: top;
+                display: inline-block !important;
+
                 &:not(:last-of-type) {
                     margin-right: 8px;
                 }
