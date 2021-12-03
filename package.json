@@ -1,13 +1,22 @@
 {
-  "name": "door-m",
+  "name": "portal-mobile",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.4.2",
+    "amfe-flexible": "^2.2.1",
+    "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "less-loader": "^7.1.0",
+    "normalize.css": "^8.0.1",
+    "postcss-pxtorem": "^6.0.0",
+    "sass-resources-loader": "^2.2.4",
+    "vant": "^3.3.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -18,7 +27,11 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "less": "^3.12.2",
     "sass": "^1.26.5",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "svg-sprite-loader": "^6.0.11",
+    "svgo": "^2.8.0"
   }
 }

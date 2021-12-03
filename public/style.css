@@ -1,0 +1,105 @@
+/*
+ * @Date: 2021-12-03
+ * @Description: 全局样式(最高优先级)
+ */
+
+/* google translate plugin */
+#google_translate_element {
+  position: fixed;
+  top: 7px !important;
+  right: 10px !important;
+  z-index: 1999 !important;
+}
+
+#google_translate_element img {
+  display: none;
+}
+
+#google_translate_element .goog-te-gadget {
+  padding: 0 10px;
+}
+
+.goog-te-gadget {
+  padding: 10px;
+}
+
+.goog-te-gadget-simple {
+  height: 30px;
+  display: flex !important;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 15px;
+  border: none !important;
+  box-shadow: 0 0 3px 0 #afafaf;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value span {
+  margin: 0 3px;
+}
+
+.goog-te-banner-frame {
+  display: none;
+}
+
+.goog-te-menu-frame {
+  border-radius: 5px;
+  width: 250px !important;
+  box-shadow: 0 3px 8px 2px #ddd !important;
+  height: 320px !important;
+  top: 60px !important;
+}
+.goog-te-menu2-item div span {
+  color: #000;
+}
+.goog-te-menu2-item div {
+  background: none !important;
+}
+.goog-te-menu2-item div span:hover {
+  color: #162d75;
+}
+.goog-te-menu2-item-selected div span {
+  color: #000;
+}
+.goog-te-menu2 {
+  border-radius: 5px;
+  border: none;
+}
+.goog-te-menu2 {
+  padding-top: 15px;
+  width: 100% !important;
+  background: #fff !important;
+  box-sizing: border-box !important;
+  padding-left: 20px;
+  height: 100% !important;
+}
+.goog-te-menu2 table {
+  width: 100% !important;
+}
+
+/* 隐藏底部错误组件 */
+
+#goog-gt-tt,
+.goog-te-spinner-pos {
+  display: none !important;
+}
+
+/* page */
+html {
+  width: 100%;
+}
+body {
+  width: 100%;
+  top: 0 !important;
+}
+font {
+  word-break: break-all !important;
+}
+html,
+body {
+  height: 100%;
+}
+div,
+img {
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
