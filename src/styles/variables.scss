@@ -6,22 +6,37 @@
 // common类:
 
 // 主题色
-$theme-color: #162d75;
+$theme-color: var(--main-theme-color);
 // 容器padding
-$container-padding: 16px;
+$container-padding: var(--main-container-padding);
 // 容器背景色1
-$container-bg1: #fff;
-// TOREVERT:
-// $container-bg2: #f7f7f7;
+$container-bg1: var(--main-container-bg1);
 // 容器背景色2
-$container-bg2: RED;
+$container-bg2: var(--main-container-bg2);
 // 容器背景色3
-$container-bg3: #f6f6f6;
+$container-bg3: var(--main-container-bg3);
 // 边框色
-$border-color1: #344c97;
+$border-color1: var(--main-border-color1);
+// 圆角
+$radius: var(--main-border-radius);
 // 特定类
+
+// 按钮颜色
+$button-color: var(--main-button-color);
+// 页脚底色
+$footer-bg: var(--main-footer-bg);
+// grid布局
+$grid-padding-h: var(--main-grid-padding-h);
+$grid-padding-v: var(--main-grid-padding-v);
 
 // 翻译高度:
 $trans-height: 47px;
 // 导航高度
 $nav-height: 44px;
+// icon底色
+$icon-color-gray: var(--main-icon-color-gray);
+
+:export {
+  buttonMainColor: $button-color;
+  iconColorGray: $icon-color-gray;
+}

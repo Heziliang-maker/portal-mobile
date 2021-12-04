@@ -13,12 +13,14 @@
       <svg-icon
         class="svgicon"
         icon-class="menu"
+        @click="handleClickMenuIcon"
       ></svg-icon>
     </div>
     <div class="search">
       <svg-icon
         class="svgicon"
         icon-class="search"
+        @click="handleClickSearchIcon"
       ></svg-icon>
     </div>
     <div class="logo">
@@ -31,12 +33,14 @@
       <svg-icon
         class="svgicon"
         icon-class="collection"
+        @click="handleClickColIcon"
       ></svg-icon>
     </div>
     <div class="user">
       <svg-icon
         class="svgicon"
         icon-class="user"
+        @click="handleClickUserIcon"
       ></svg-icon>
     </div>
   </div>
@@ -44,15 +48,24 @@
 
 
 <script>
+import { useStore } from "vuex";
+import { TOGGLE_MENU_VISIBILITY } from "@/store/base/mutations";
 export default {
     setup() {
-        return {};
+        const store = useStore();
+
+        const handleClickMenuIcon = () => {
+            store.commit(TOGGLE_MENU_VISIBILITY, true);
+        };
+        const handleClickSearchIcon = () => {};
+        const handleClickColIcon = () => {};
+        const handleClickUserIcon = () => {};
+        return { handleClickMenuIcon, handleClickSearchIcon, handleClickColIcon, handleClickUserIcon };
     }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+
 
 
 <style lang="scss" scoped>

@@ -5,10 +5,7 @@
  * 组件变量可以通过 root 选择器 和 ConfigProvider 组件 修改。
  */
 
-// 引入 css变量
-import "@/styles/vant/vant_cover.css";
-
-// 引入组件
+// 按需引入vant组件
 import {
   Swipe,
   SwipeItem,
@@ -30,8 +27,11 @@ import {
   Toast,
   Dialog,
   Notify,
+  //
+  Lazyload,
 } from "vant";
 
+// 按需引入vant样式
 import "vant/lib/swipe/style";
 import "vant/lib/swipe-item/style";
 import "vant/lib/tabs/style";
@@ -53,8 +53,12 @@ import "vant/lib/toast/style";
 import "vant/lib/dialog/style";
 import "vant/lib/notify/style";
 
+// 引入 css变量(注意顺序:要在引入vant样式后进行覆盖)
+import "@/styles/vant/vant_cover.css";
+
 Toast.setDefaultOptions({ className: "notranslate" });
 export default function installVant(instance) {
+  // 按需注册
   instance.use(Swipe);
   instance.use(SwipeItem);
   instance.use(Tabs);
@@ -75,4 +79,6 @@ export default function installVant(instance) {
   instance.use(Toast);
   instance.use(Dialog);
   instance.use(Notify);
+  //
+  instance.use(Lazyload);
 }

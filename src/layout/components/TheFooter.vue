@@ -108,8 +108,8 @@ export default {
 
 <style lang="scss" scoped>
 .footer ::v-deep {
-    background: $theme-color;
-    margin-top: 20px;
+    background: $footer-bg;
+    margin-top: 8px;
     width: 100%;
     .footer-top {
         .van-collapse {
@@ -129,7 +129,6 @@ export default {
             .van-collapse-item__content {
                 padding-top: 17px;
                 padding-bottom: 17px;
-                background: $theme-color;
                 p {
                     font-size: 10px;
                     line-height: 17px;

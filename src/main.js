@@ -21,9 +21,13 @@ import "amfe-flexible";
 import installSvgIcons from "./icons";
 // =>引入 vant 注册函数
 import installVant from "./config/vant";
-// import "vant/lib/collapse/style";
-// import "vant/lib/collapse-item/style";
-// import "vant/lib/button/style";
+// =>引入 自定义指令 注册函数
+import installDirectives from "./directives";
+// =>引入 过滤器
+import filters from "./filters";
+// =>引入 全局组件 注册函数
+import installGlobalComponents from "./components/global";
+
 // 实例初始化
 const app = createApp(App);
 
@@ -31,5 +35,13 @@ const app = createApp(App);
 installSvgIcons(app);
 // 批量注册vant组件
 installVant(app);
+// 批量注册自定义指令
+installDirectives(app);
+// 批量注册全局组件
+installGlobalComponents(app);
+
+// 注册全局属性
+// 1.挂载过滤器
+app.config.globalProperties.$filter = filters;
 
 app.use(store).use(router).mount("#app");

@@ -5,10 +5,18 @@
 
 /* google translate plugin */
 #google_translate_element {
-  position: fixed;
+  position: absolute;
+
+  border: 1px solid red;
+  left: 50%;
+  transform: translateX(-50%);
   top: 7px !important;
   right: 10px !important;
   z-index: 1999 !important;
+  opacity: 1;
+  width: 120px;
+  height: 33px;
+  text-align: center;
 }
 
 #google_translate_element img {
@@ -102,4 +110,8 @@ div,
 img {
   user-select: none;
   -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+p,
+ul {
+  margin: 0;
 }

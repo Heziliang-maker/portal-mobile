@@ -4,16 +4,17 @@
  */
 
 import { baseURL } from "@/config/project";
+import request from "@/utils/axios";
 
 export function trackViewBehavior({ type, id, origin, viewTime }) {
-  return requestAdmin({
-    url: baseURL.shop + "/analyze/portal/visit/view",
+  return request({
+    url: baseURL.admin + "/analyze/portal/visit/view",
     method: "post",
     data: {
-      id: id ?? null,
-      origin: origin ?? null,
+      id: id || null,
+      origin: origin || null,
       type: type,
-      viewTime: viewTime ?? null,
+      viewTime: viewTime || null,
     },
   });
 }

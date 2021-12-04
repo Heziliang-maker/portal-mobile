@@ -4,4 +4,35 @@
  */
 
 :root {
+  /* 容器类 */
+  --main-theme-color: #162d75;
+
+  --main-container-padding: 16px;
+  --main-container-bg1: #fff;
+  --main-container-bg2: #f7f7f7;
+  --main-container-bg3: #f6f6f6;
+
+  --main-footer-bg: #f5f3ed;
+
+  /* 边框类 */
+  --main-border-color1: #344c97;
+  --main-border-radius: 4px;
+
+  /* 宫格类 */
+  --main-grid-padding-h: 8px;
+  --main-grid-padding-v: 4px;
+  /* 按钮类 */
+  --main-button-color: #ff8030;
+
+  /* icon类 */
+  --main-icon-color-gray: #999999;
+
+  /* vant类 */
+  --van-swipe-indicator-active-background-color: #ffffff;
+  --van-swipe-indicator-inactive-background-color: rgba(255, 255, 255, 0.6);
+  --van-border-radius-sm: var(--main-border-radius);
+  --van-grid-item-content-padding: var(--main-grid-padding-h)
+    var(--main-grid-padding-v);
+  --van-collapse-item-content-background-color: var(--main-footer-bg);
+  --van-sticky-z-index: 100;
 }

@@ -5,5 +5,10 @@
 
 // type : shop/admin
 
-export * as _analysis from "./analysis";
-export * as _translate from "./translate";
+import * as _analysis from "./analysis";
+import * as _translate from "./translate";
+
+export default {
+  _analysis,
+  _translate,
+};

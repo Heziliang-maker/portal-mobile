@@ -20,6 +20,10 @@
     <div class="container-footer notranslate">
       <TheFooter />
     </div>
+    <!-- menupop -->
+    <div class="menupop">
+      <MenuPop />
+    </div>
   </div>
 </template>
 
@@ -27,19 +31,11 @@
 <script>
 import TheNav from "./components/TheNav";
 import TheFooter from "./components/TheFooter";
-import { useStore } from "vuex";
-import { computed } from "@vue/reactivity";
+import MenuPop from "@/components/MenuPop";
 export default {
     name: "Layout",
-    components: {
-        TheNav,
-        TheFooter
-    },
-    setup() {
-        const store = useStore();
-
-        return { isFooterVisible: computed(() => store.state.isFooterVisible) };
-    }
+    components: { TheNav, TheFooter, MenuPop },
+    setup() {}
 };
 </script>
 <style lang="scss" scoped>
@@ -52,6 +48,13 @@ export default {
 
     .container-main {
         min-height: 800px;
+    }
+
+    .menupop .van-popup {
+        width: 90%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 0 $container-padding;
     }
 }
 </style>
