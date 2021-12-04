@@ -12,17 +12,17 @@
   header,
   main,
   footer {
-    outline: 1Px solid #00cec9;
+    outline: 1px solid $outline-color-1;
   }
   a,
   span {
-    outline: 1Px dashed #ff0080;
+    outline: 1px dashed $outline-color-2;
   }
   i {
-    outline: 1Px solid #ff6666;
+    outline: 1px solid $outline-color-3;
   }
   img {
-    outline: 1Px solid #ffdb4d;
+    outline: 1px solid $outline-color-4;
   }
 }
 
@@ -31,14 +31,14 @@
   color: $color;
 }
 
-@mixin font-n($size: 13px, $color: #666666) {
+@mixin font-n($size: 13px, $color: $word-color-2) {
   font-size: $size;
   font-family: SourceHanSansSC-Normal, SourceHanSansSC;
   font-weight: 400;
   color: $color;
 }
 
-@mixin font-b($size: 16px, $color: #111111) {
+@mixin font-b($size: 16px, $color: $word-color-1) {
   font-size: $size;
   font-family: SourceHanSansSC-Bold, SourceHanSansSC;
   font-weight: bold;

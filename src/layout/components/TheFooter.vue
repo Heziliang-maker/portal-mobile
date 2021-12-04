@@ -4,6 +4,76 @@
 -->
 <template>
   <div class="footer">
+    <div class="gap"></div>
+    <div class="footer-info">
+      <!-- 1 -->
+      <div class="footer-info-item">
+        <div class="item-pic">
+          <img
+            src="@/assets/images/layout-footer/info-1.png"
+            alt=""
+          >
+        </div>
+        <div class="item-main">
+          <div class="item-main__title">Safe Payment</div>
+          <div class="item-main__content">Use a secure payment</div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="footer-info-item">
+        <div class="item-pic">
+          <img
+            src="@/assets/images/layout-footer/info-2.png"
+            alt=""
+          >
+        </div>
+        <div class="item-main">
+          <div class="item-main__title">Safe Payment</div>
+          <div class="item-main__content">Use a secure payment</div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="footer-info-item">
+        <div class="item-pic">
+          <img
+            src="@/assets/images/layout-footer/info-3.png"
+            alt=""
+          >
+        </div>
+        <div class="item-main">
+          <div class="item-main__title">Global Delivery</div>
+          <div class="item-main__content">Covering more than 200 countries and
+            regions</div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="footer-info-item">
+        <div class="item-pic">
+          <img
+            src="@/assets/images/layout-footer/info-4.png"
+            alt=""
+          >
+        </div>
+        <div class="item-main">
+          <div class="item-main__title">Low Price Guarantee</div>
+          <div class="item-main__content">Reduce intermediate</div>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="footer-info-item">
+        <div class="item-pic">
+          <img
+            src="@/assets/images/layout-footer/info-5.png"
+            alt=""
+          >
+        </div>
+        <div class="item-main">
+          <div class="item-main__title">International Brand</div>
+          <div class="item-main__content">Guarantee authentici</div>
+        </div>
+      </div>
+    </div>
+    <div class="gap"></div>
     <div class="footer-collapse">
       <van-collapse
         v-model="activeNames"
@@ -29,31 +99,31 @@
       <div class="title">Payment Options</div>
       <div class="content">
         <img
-          src="@/assets/images/pay-1.png"
+          src="@/assets/images/layout-footer/pay-1.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/pay-2.png"
+          src="@/assets/images/layout-footer/pay-2.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/pay-3.png"
+          src="@/assets/images/layout-footer/pay-3.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/pay-4.png"
+          src="@/assets/images/layout-footer/pay-4.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/pay-5.png"
+          src="@/assets/images/layout-footer/pay-5.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/pay-6.png"
+          src="@/assets/images/layout-footer/pay-6.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/pay-7.png"
+          src="@/assets/images/layout-footer/pay-7.png"
           alt="visa支付"
         >
       </div>
@@ -139,6 +209,43 @@ export default {
     background: $footer-bg;
     margin-top: 8px;
     width: 100%;
+    // 信息
+    .footer-info {
+        padding: 24px $container-padding;
+        background-color: $container-bg-0;
+        .footer-info-item {
+            margin: 24px 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .item-pic {
+                flex: 0 0 38px;
+                margin-right: 17px;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            .item-main {
+                .item-main__title {
+                    @include font-b(14px, #1d1d1d);
+                    line-height: 20px;
+                }
+                .item-main__content {
+                    @include font-n(12px, #1d1d1d);
+                    line-height: 18px;
+                }
+            }
+        }
+        .footer-info-item:first-of-type {
+            margin-top: 0;
+        }
+        .footer-info-item:last-of-type {
+            margin-bottom: 0;
+        }
+    }
     // 折叠面板
     .footer-collapse {
         .van-collapse {
@@ -147,11 +254,10 @@ export default {
                 .van-cell__title {
                     @include font-b(14px);
                     line-height: 20px;
-
                     background: $footer-bg;
                 }
                 .van-cell__right-icon {
-                    color: $icon-color-gray;
+                    color: $icon-color-1;
                 }
             }
             .van-collapse-item__content {
@@ -194,18 +300,18 @@ export default {
     }
     .footer-copyright {
         padding: 10px $container-padding;
-        @include font-n(12px, #999999);
-        background-color: #fff;
+        @include font-n(12px, $word-color-3);
+        background-color: $container-bg-0;
         text-align: center;
     }
     .footer-link {
         padding-bottom: 20px;
-        background-color: #fff;
+        background-color: $container-bg-0;
         text-align: center;
         a {
             word-break: keep-all;
             text-align: center;
-            @include font-n(12px, #999999);
+            @include font-n(12px, $word-color-3);
         }
     }
 }

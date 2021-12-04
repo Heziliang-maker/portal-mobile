@@ -25,7 +25,7 @@
           <img
             v-show="!!item.video && !item.isView"
             class="item-pic-play"
-            src="@/assets/images/bofang.png"
+            src="@/assets/images/global/bofang.png"
             alt="播放该视频"
             @click.stop="handleClickVideoPlayIcon(index,item.productUrl)"
           >
@@ -33,14 +33,14 @@
             <transition name="van-fade">
               <img
                 v-show="love"
-                src="@/assets/images/col-active.png"
+                src="@/assets/images/global/col-active.png"
                 alt="心愿单"
               >
             </transition>
             <transition name="van-fade">
               <img
                 v-show="!love"
-                src="@/assets/images/col-inactive.png"
+                src="@/assets/images/global/col-inactive.png"
                 alt="心愿单"
               >
             </transition>
@@ -198,7 +198,7 @@ export default {
         flex-grow: 0;
         overflow: hidden;
         .item-pic {
-            background-color: $container-bg-3;
+            background-color: $container-bg-2;
             overflow: hidden;
             margin-bottom: 7px;
             padding: 8px;
@@ -249,7 +249,7 @@ export default {
                 line-height: 28px;
                 text-align: center;
                 border-radius: 100%;
-                background: #ffffff;
+                background: $container-bg-0;
                 border: 1px solid #e3e3e3;
                 img {
                     height: 16px;
@@ -290,7 +290,7 @@ export default {
                     top: 15px;
 
                     z-index: 99;
-                    color: #fff;
+                    color: $word-color-0;
                 }
             }
         }

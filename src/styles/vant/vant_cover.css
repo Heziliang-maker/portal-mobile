@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-03
- * @Description: vant 变量覆盖
+ * @Description: root css 变量 ; vant 变量覆盖
  */
 
 :root {
@@ -8,9 +8,9 @@
   --main-theme-color: #162d75;
 
   --main-container-padding: 16px;
-  --main-container-bg-1: #fff;
-  --main-container-bg-2: #f7f7f7;
-  --main-container-bg-3: #f6f6f6;
+  --main-container-bg-0: #ffffff;
+  --main-container-bg-1: #f7f7f7;
+  --main-container-bg-2: #f6f6f6;
 
   --main-footer-bg: #f5f3ed;
 
@@ -26,18 +26,21 @@
   --main-button-color: #ff8030;
 
   /* icon类 */
-  --main-icon-color-gray: #999999;
+  --main-icon-color-1: #999999;
 
   /* 文字类 */
+  --main-word-color-0: #ffffff;
   --main-word-color-1: #111111;
-  --main-word-color-2: #999999;
+  --main-word-color-2: #666666;
+  --main-word-color-3: #999999;
 
   /* vant类 */
-  --van-swipe-indicator-active-background-color: #ffffff;
+  --van-swipe-indicator-active-background-color: $container-bg-0;
   --van-swipe-indicator-inactive-background-color: rgba(255, 255, 255, 0.6);
   --van-border-radius-sm: var(--main-border-radius);
   --van-grid-item-content-padding: var(--main-grid-padding-h)
     var(--main-grid-padding-v);
   --van-collapse-item-content-background-color: var(--main-footer-bg);
   --van-sticky-z-index: 100;
+  --van-cell-vertical-padding: 12px;
 }

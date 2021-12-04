@@ -12,34 +12,34 @@
     <div class="menu">
       <svg-icon
         class="svgicon"
-        icon-class="menu"
+        icon-class="layout-nav-menu"
         @click="handleClickMenuIcon"
       ></svg-icon>
     </div>
     <div class="search">
       <svg-icon
         class="svgicon"
-        icon-class="search"
+        icon-class="layout-nav-search"
         @click="handleClickSearchIcon"
       ></svg-icon>
     </div>
     <div class="logo">
       <img
-        src="@/assets/images/header-logo.webp"
+        src="@/assets/images/layout-nav/header-logo.webp"
         alt="buykop-logo"
       >
     </div>
-    <div class="col">
+    <div class="collection">
       <svg-icon
         class="svgicon"
-        icon-class="collection"
+        icon-class="layout-nav-collection"
         @click="handleClickColIcon"
       ></svg-icon>
     </div>
     <div class="user">
       <svg-icon
         class="svgicon"
-        icon-class="user"
+        icon-class="layout-nav-user"
         @click="handleClickUserIcon"
       ></svg-icon>
     </div>
@@ -105,7 +105,7 @@ export default {
     grid-area: search;
 }
 
-.col {
+.collection {
     grid-area: col;
 }
 
