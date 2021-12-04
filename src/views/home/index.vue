@@ -132,7 +132,7 @@ export default {
     width: 100%;
     padding: $container-padding;
     box-sizing: border-box;
-    background-color: $container-bg2;
+    background-color: $container-bg-2;
 }
 .new-week {
     .grid {

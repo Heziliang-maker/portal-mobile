@@ -198,7 +198,7 @@ export default {
         flex-grow: 0;
         overflow: hidden;
         .item-pic {
-            background-color: $container-bg3;
+            background-color: $container-bg-3;
             overflow: hidden;
             margin-bottom: 7px;
             padding: 8px;

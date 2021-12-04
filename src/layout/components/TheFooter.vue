@@ -4,7 +4,7 @@
 -->
 <template>
   <div class="footer">
-    <div class="footer-top">
+    <div class="footer-collapse">
       <van-collapse
         v-model="activeNames"
         :border="false"
@@ -25,22 +25,50 @@
         </van-collapse-item>
       </van-collapse>
     </div>
-    <div class="footer-bot">
-      <div
-        class="footer-bot-logo"
-        @click="$router.push('/home')"
-      >
+    <div class="footer-payinfo">
+      <div class="title">Payment Options</div>
+      <div class="content">
         <img
-          src="@/assets/images/footer-logo.webp"
-          alt=""
+          src="@/assets/images/pay-1.png"
+          alt="visa支付"
+        >
+        <img
+          src="@/assets/images/pay-2.png"
+          alt="visa支付"
+        >
+        <img
+          src="@/assets/images/pay-3.png"
+          alt="visa支付"
+        >
+        <img
+          src="@/assets/images/pay-4.png"
+          alt="visa支付"
+        >
+        <img
+          src="@/assets/images/pay-5.png"
+          alt="visa支付"
+        >
+        <img
+          src="@/assets/images/pay-6.png"
+          alt="visa支付"
+        >
+        <img
+          src="@/assets/images/pay-7.png"
+          alt="visa支付"
         >
       </div>
-      <p class="footer-bot-copyright">
-        © 2021 I Midnight Sad Rose Limited All Rights Reserved I Be a visionary
-        I Powered by Buykop
+    </div>
+    <div class="footer-copyright">
+      <p>
+        © 2021 I Midnight Sad Rose Limited I All Rights Reserved I Be a
+        visionary I Powered by Buykop
       </p>
+    </div>
+    <div class="footer-link">
       <a
-        href="https://beian.miit.gov.cn/#/Integrated/index">沪ICP备2020033164号-2</a>
+        class="footer-bot__link"
+        href="https://beian.miit.gov.cn/#/Integrated/index"
+      >沪ICP备2020033164号-2</a>
     </div>
   </div>
 </template>
@@ -111,71 +139,73 @@ export default {
     background: $footer-bg;
     margin-top: 8px;
     width: 100%;
-    .footer-top {
+    // 折叠面板
+    .footer-collapse {
         .van-collapse {
             .van-cell {
-                background: $theme-color;
+                background: $footer-bg;
                 .van-cell__title {
-                    font-size: 12px;
-                    font-family: PingFangSC-Regular, PingFang SC;
-                    font-weight: 400;
-                    color: #ffffff;
-                    background: $theme-color;
+                    @include font-b(14px);
+                    line-height: 20px;
+
+                    background: $footer-bg;
                 }
                 .van-cell__right-icon {
-                    color: #ffffff;
+                    color: $icon-color-gray;
                 }
             }
             .van-collapse-item__content {
                 padding-top: 17px;
                 padding-bottom: 17px;
                 p {
-                    font-size: 10px;
-                    line-height: 17px;
-                    font-family: PingFangSC-Regular, PingFang SC;
-                    font-weight: 400;
-                    color: #ffffff;
+                    @include font-n(14px);
+                    line-height: 20px;
                 }
                 & > p:first-of-type {
-                    margin-bottom: 10px;
+                    margin-bottom: $container-padding;
+                }
+                & > p:last-of-type {
+                    margin-bottom: 0;
                 }
             }
             .van-cell::after {
-                // background: #162d75;
-                border-bottom: 1px solid $border-color1;
+                border-bottom: 1px solid $border-color-2;
             }
             .van-collapse-item--border::after {
-                border-top: 1px solid $border-color1;
+                border-top: 1px solid $border-color-2;
             }
         }
     }
-    .footer-bot {
-        width: calc(100% - 32px);
-        box-sizing: border-box;
-        padding: 27px 0 42px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-top: 1px solid #344c97;
-
-        &-logo {
-            height: 30px;
-            margin-bottom: 10px;
+    .footer-payinfo {
+        background: $footer-bg;
+        padding: 12px $container-padding 24px;
+        border-top: 1px solid $border-color-2;
+        .title {
+            @include font-b(14px);
+            line-height: 20px;
+            margin-bottom: 16px;
+        }
+        .content {
             img {
-                height: 100%;
+                width: 42px;
+                margin-right: 6px;
             }
         }
-        &-copyright,
+    }
+    .footer-copyright {
+        padding: 10px $container-padding;
+        @include font-n(12px, #999999);
+        background-color: #fff;
+        text-align: center;
+    }
+    .footer-link {
+        padding-bottom: 20px;
+        background-color: #fff;
+        text-align: center;
         a {
             word-break: keep-all;
-            width: 255px;
             text-align: center;
-            font-size: 12px;
-            font-family: PingFangSC-Regular, PingFang SC;
-            font-weight: 400;
-            color: #ffffff;
-            line-height: 18px;
+            @include font-n(12px, #999999);
         }
     }
 }

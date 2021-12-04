@@ -30,7 +30,6 @@
 
 <script>
 import { reactive, toRefs } from "vue";
-
 export default {
     name: "BannerSwiper",
     props: {

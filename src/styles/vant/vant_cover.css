@@ -8,14 +8,15 @@
   --main-theme-color: #162d75;
 
   --main-container-padding: 16px;
-  --main-container-bg1: #fff;
-  --main-container-bg2: #f7f7f7;
-  --main-container-bg3: #f6f6f6;
+  --main-container-bg-1: #fff;
+  --main-container-bg-2: #f7f7f7;
+  --main-container-bg-3: #f6f6f6;
 
   --main-footer-bg: #f5f3ed;
 
   /* 边框类 */
-  --main-border-color1: #344c97;
+  --main-border-color-1: #344c97;
+  --main-border-color-2: #dfdacd;
   --main-border-radius: 4px;
 
   /* 宫格类 */
@@ -26,6 +27,10 @@
 
   /* icon类 */
   --main-icon-color-gray: #999999;
+
+  /* 文字类 */
+  --main-word-color-1: #111111;
+  --main-word-color-2: #999999;
 
   /* vant类 */
   --van-swipe-indicator-active-background-color: #ffffff;
