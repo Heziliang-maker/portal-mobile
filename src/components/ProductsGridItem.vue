@@ -92,7 +92,7 @@
           {{(dataSource.retailPrice*rate).toFixed(2)}}</p>
         <div
           v-else
-          class="gutter"
+          class="gap"
         ></div>
       </div>
       <!-- <span>
@@ -285,6 +285,9 @@ export default {
             .local-price {
                 @include font-n();
                 line-height: 18px;
+            }
+            .gap {
+                height: $gutter-height;
             }
         }
         .origin {

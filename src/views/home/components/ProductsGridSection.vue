@@ -141,7 +141,6 @@ export default {
 
 <style lang="scss" scoped>
 .grid {
-    margin-top: $grid-padding-h;
     margin-bottom: $grid-padding-h;
 }
 </style>

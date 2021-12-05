@@ -6,7 +6,11 @@
   <div class="slider-item">
     <!-- 左侧 -->
     <section class="left">
-      <div class="item-pic">
+      <div
+        class="item-pic"
+        :data-before-index="badgeStyle.index"
+        :style="badgeStyle.styleVar"
+      >
         <!-- 视频播放按钮 -->
         <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
         <img
@@ -98,7 +102,7 @@
             {{(dataSource.retailPrice*rate).toFixed(2)}}</p>
           <div
             v-else
-            class="gutter"
+            class="gap"
           ></div>
         </div>
         <!-- <span>
@@ -137,6 +141,14 @@ export default {
         dataSource: {
             type: Object,
             default: () => {}
+        },
+        groupIndex: {
+            type: Number,
+            required: true
+        },
+        selfIndex: {
+            type: Number,
+            required: true
         }
     },
     setup(props, { emit }) {
@@ -171,6 +183,12 @@ export default {
             videoPlayerRef,
             ccy: computed(() => store.state.ccy),
             rate: computed(() => store.state.rate),
+            badgeStyle: computed(() => {
+                return {
+                    index: props.groupIndex * 2 + props.selfIndex,
+                    styleVar: { "--before-background-color": ["#FC5443", "#FC9643"][props.selfIndex - 1] }
+                };
+            }),
             handleClickVideoPlayIcon,
             ...toRefs(state)
         };
@@ -193,42 +211,6 @@ export default {
         margin-right: 8px;
     }
 
-    .item-pic {
-        position: relative;
-        width: 100%;
-        background-color: $container-bg-2;
-        overflow: hidden;
-        margin-bottom: 7px;
-        padding: 8px;
-        box-sizing: border-box;
-        border-radius: $radius;
-
-        &::before {
-            content: "1";
-            display: block;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 28px;
-            height: 28px;
-            background-color: #fc5443;
-            border-radius: $radius;
-            text-align: center;
-            line-height: 27px;
-            @include font-n(18px, $word-color-0);
-            z-index: 2;
-        }
-
-        .van-img {
-            border-radius: $radius;
-            background-color: $container-bg-0;
-        }
-
-        .van-img > img {
-            width: 100%;
-            height: 100%;
-        }
-    }
     .item-name {
         width: 100%;
         white-space: pre-wrap;
@@ -246,10 +228,42 @@ export default {
         // margin-bottom: 8px;
     }
     .item-pic {
-        width: 100%;
         position: relative;
+        width: 100%;
+        background-color: $container-bg-2;
+        overflow: hidden;
+        margin-bottom: 7px;
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: $radius;
         display: flex;
         justify-content: center;
+
+        &::before {
+            content: attr(data-before-index);
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 28px;
+            height: 28px;
+            background-color: var(--before-background-color);
+            border-radius: $radius;
+            text-align: center;
+            line-height: 27px;
+            @include font-n(18px, $word-color-0);
+            z-index: 2;
+        }
+
+        .van-img {
+            border-radius: $radius;
+            background-color: $container-bg-0;
+        }
+
+        .van-img > img {
+            width: 100%;
+            height: 100%;
+        }
         .item-pic-col {
             position: absolute;
             right: 15%;
@@ -322,6 +336,9 @@ export default {
             .local-price {
                 @include font-n();
                 line-height: 18px;
+            }
+            .gap {
+                height: $gutter-height;
             }
         }
         .origin {

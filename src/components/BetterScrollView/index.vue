@@ -91,7 +91,7 @@ export default {
 .container {
     &-wrapper {
         position: relative;
-        padding: 14px;
+        padding: $container-padding;
         white-space: nowrap;
         overflow: hidden;
 

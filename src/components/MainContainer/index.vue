@@ -11,13 +11,16 @@
       <!-- <Grid v-bind="$attrs" /> -->
       <slot name="content"></slot>
     </section>
+
     <section class="footer">
-      <van-button
-        :color="variables.buttonMainColor"
-        size="small"
-        plain
-        @click="handleClickSeeMore"
-      >See More</van-button>
+      <slot name="footer">
+        <van-button
+          :color="variables.buttonMainColor"
+          size="small"
+          plain
+          @click="handleClickSeeMore"
+        >See More</van-button>
+      </slot>
     </section>
   </div>
 </template>

@@ -115,4 +115,13 @@ export default {
     box-sizing: border-box;
     background-color: $container-bg-2;
 }
+.new-week {
+    margin-top: $grid-padding-h;
+}
+.hot-new {
+    margin-top: $grid-padding-h;
+}
+.shop-categories {
+    margin-top: $grid-padding-h;
+}
 </style>

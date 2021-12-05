@@ -27,6 +27,9 @@
         </template>
       </BetterScrollView>
     </template>
+    <template #footer>
+      <div class="gutter"></div>
+    </template>
   </MainContainer>
 </template>
 
@@ -109,6 +112,7 @@ export default {
 <style lang="scss" scoped>
 .category {
     margin-right: 10px;
+    margin-bottom: 10px;
 
     .category:first-of-type {
         margin-bottom: 22px;
