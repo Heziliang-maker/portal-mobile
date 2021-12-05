@@ -5,4 +5,6 @@
 export default {
   isFooterVisible: false,
   isMenuShow: false,
+  ccy: "$",
+  rate: 1.2,
 };

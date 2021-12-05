@@ -17,6 +17,7 @@
   /* 边框类 */
   --main-border-color-1: #344c97;
   --main-border-color-2: #dfdacd;
+  --main-border-color-3: #e3e3e3;
   --main-border-radius: 4px;
 
   /* 宫格类 */
@@ -33,6 +34,7 @@
   --main-word-color-1: #111111;
   --main-word-color-2: #666666;
   --main-word-color-3: #999999;
+  --main-word-color-4: #333333;
 
   /* vant类 */
   --van-swipe-indicator-active-background-color: $container-bg-0;

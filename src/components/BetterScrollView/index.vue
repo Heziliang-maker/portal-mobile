@@ -12,15 +12,16 @@
       ref="wrapperRef"
     >
       <div class="container-box">
-
         <div
           class="container-box-item"
           :class="targetClass"
-          v-for="item in scrollList"
+          v-for="(item,index) in scrollList"
+          :key="item[columnKey]"
         >
           <slot
-            name="content"
+            name="item"
             :item="item"
+            :index="index"
           ></slot>
         </div>
       </div>
@@ -36,9 +37,13 @@ export default {
     props: {
         scrollList: {
             type: Array,
-            required: true
+            default: () => []
         },
         targetClass: {
+            type: String
+        },
+        // key 属性名
+        columnKey: {
             type: String
         }
     },
@@ -61,6 +66,7 @@ export default {
         watch(
             () => props.scrollList,
             async (newValue, oldValue) => {
+                console.log("newValue=>", newValue);
                 await nextTick();
                 const wrapper = wrapperRef.value;
                 state.bs = new BScroll(wrapper, {

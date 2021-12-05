@@ -4,7 +4,7 @@
 -->
 <template>
   <div class="footer">
-    <div class="gap"></div>
+    <div class="gutter"></div>
     <div class="footer-info">
       <!-- 1 -->
       <div class="footer-info-item">
@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="gap"></div>
+    <div class="gutter"></div>
     <div class="footer-collapse">
       <van-collapse
         v-model="activeNames"

@@ -8,7 +8,4 @@
 import * as _analysis from "./analysis";
 import * as _translate from "./translate";
 
-export default {
-  _analysis,
-  _translate,
-};
+export { _analysis, _translate };

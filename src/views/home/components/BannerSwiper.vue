@@ -3,8 +3,10 @@
  * @Description: Banner Swiper
 -->
 <template>
-  <van-swipe class="banner-swiper">
-    <!-- :autoplay="1000" -->
+  <van-swipe
+    :autoplay="1000"
+    class="banner-swiper"
+  >
     <van-swipe-item
       class="swipe-item"
       v-for="banner in bannerList"

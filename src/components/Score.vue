@@ -13,20 +13,26 @@
       void-color="#eee"
     />
     <span class="score-num">
-      <a>{{ $attrs.value }} points</a>
+      <a>{{ $attrs.modelValue }} points</a>
     </span>
   </div>
 </template>
 
+
+
 <script>
 export default {
-    name: "Score"
+    name: "Score",
+    setup() {
+        return {};
+    }
 };
 </script>
 
+
 <style lang="scss" scoped>
 .score {
-    line-height: 12px;
+    line-height: 18px;
     margin: 6px 0;
 }
 .score-star {
@@ -34,10 +40,8 @@ export default {
     // height: 30px;
 }
 .score-num {
-    font-size: 12px;
-    font-family: PingFangSC-Regular, PingFang SC;
-    font-weight: 400;
-    color: #333333;
+    @include font-n(12px, $word-color-4);
+    line-height: 18px;
     vertical-align: middle;
 }
 </style>

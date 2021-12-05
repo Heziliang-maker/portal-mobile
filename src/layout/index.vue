@@ -51,7 +51,7 @@ export default {
     }
 
     .menupop .van-popup {
-        width: 90%;
+        width: 300px;
         height: 100%;
         box-sizing: border-box;
         padding: 0 $container-padding;

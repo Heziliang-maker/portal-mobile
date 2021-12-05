@@ -4,8 +4,8 @@
  */
 
 //  小间隔
-.gap {
+.gutter {
   width: 100%;
-  height: 8px;
+  height: $gutter-height;
   background-color: $container-bg-2;
 }

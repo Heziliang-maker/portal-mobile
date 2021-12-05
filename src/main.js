@@ -27,6 +27,8 @@ import installDirectives from "./directives";
 import filters from "./filters";
 // =>引入 全局组件 注册函数
 import installGlobalComponents from "./components/global";
+// =>引入window函数
+import "@/utils/window-func";
 
 // 实例初始化
 const app = createApp(App);

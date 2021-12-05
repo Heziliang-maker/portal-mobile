@@ -1,62 +1,42 @@
 <!--
- * @Date: 2021-12-03
- * @Description: views/home 首页
+ * @Date: 2021-12-05
+ * @Description: ProductsSlider
 -->
-
 <template>
-  <section class="banner">
-    <BannerSwiper :banner-list="bannerList" />
-  </section>
-  <!-- new-week -->
-  <section class="new-week">
-    <ProductsGridSection />
-  </section>
-
-  <!-- Popular Products At -->
-
-  <!-- hot-new -->
-  <section class="hot-new">
-    <ProductsSliderSection />
-  </section>
-  <!-- gutter -->
-  <div class="gutter"></div>
-  <!-- Shop By Categories -->
-  <section class="shop-categories">
-    <CategoriesSection />
-  </section>
-  <!-- 
-  <better-scroll-view
-    class="view"
-    :scrollList="scrollList"
-    targetClass="box"
-  >
-    <template #content="{item}">{{item.name}}</template>
-  </better-scroll-view> -->
+  <MainContainer class="maincontainer">
+    <template #title>
+      Hot New Product
+    </template>
+    <template #content>
+      <BetterScrollView
+        :scrollList="scrollList"
+        targetClass="box"
+        columnKey="productUrl"
+      >
+        <template #item="{item}">
+          <ProductsSliderItem :data-source="item" />
+          <ProductsSliderItem :data-source="item" />
+        </template>
+      </BetterScrollView>
+    </template>
+  </MainContainer>
 </template>
 
-
 <script>
-import { reactive, provide, toRefs } from "vue";
-import BannerSwiper from "./components/BannerSwiper";
-import ProductsGridSection from "./components/ProductsGridSection.vue";
-import ProductsSliderSection from "./components/ProductsSliderSection.vue";
-import CategoriesSection from "./components/CategoriesSection.vue";
+import { provide, reactive, toRefs } from "vue";
+import MainContainer from "@/components/MainContainer";
+import BetterScrollView from "@/components/BetterScrollView";
+import ProductsSliderItem from "@/components/ProductsSliderItem";
 export default {
-    name: "Home",
-    components: { BannerSwiper, ProductsGridSection, ProductsSliderSection, CategoriesSection },
+    name: "ProductsSliderSection",
+    components: { MainContainer, BetterScrollView, ProductsSliderItem },
     setup() {
         const state = reactive({
-            bannerList: [
-                {
-                    advUrl: "https://www.ecofimili.com/system/detail/176",
-                    img: "http://buykop-ap.oss-ap-southeast-1.aliyuncs.com/images/2021-08-24/2/6714ae2c53b64098ad440846ba1603cd.png"
-                },
-                {
-                    advUrl: "https://www.ecofimili.com/system/detail/395",
-                    img: "http://buykop-ap.oss-ap-southeast-1.aliyuncs.com/images/2021-08-24/2/9a0411bd11ae4d23af9d2db70858d647.png"
-                }
-            ],
-            gridList: [
+            scrollList: []
+        });
+
+        setTimeout(() => {
+            state.scrollList = [
                 {
                     ccy: "USD",
                     classifyId: 4,
@@ -96,8 +76,16 @@ export default {
                         "https://buykop.oss-cn-shanghai.aliyuncs.com/images/2021-11-09/103/3bb93e000b2f4eabb6ecc2d34b4c6cf0.jpg",
                     isView: false
                 }
-            ]
-        });
+            ];
+        }, 600);
+
+        const updateGrid = (productUrl) => {
+            console.log("=>", "update ..");
+            const target = state.gridList.find((item) => item.productUrl === productUrl);
+            target.isView = !target.isView;
+        };
+
+        provide("update", updateGrid);
 
         return {
             ...toRefs(state)
@@ -106,13 +94,14 @@ export default {
 };
 </script>
 
-
-
 <style lang="scss" scoped>
-.banner {
-    width: 100%;
-    padding: $container-padding;
-    box-sizing: border-box;
-    background-color: $container-bg-2;
+.maincontainer ::v-deep {
+    .box {
+        // width: 200px;
+        vertical-align: top;
+        & > div:first-of-type {
+            margin-bottom: $slider-padding-h;
+        }
+    }
 }
 </style>
