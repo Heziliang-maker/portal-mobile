@@ -40,7 +40,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #container ::v-deep {
-    @include DEBUG;
+    // @include DEBUG;
     padding-top: $trans-height;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

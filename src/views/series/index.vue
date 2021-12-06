@@ -9,6 +9,13 @@
     <div class="series-header">
       <ActionSheet @load="onLoad" />
     </div>
+
+    <div
+      class="series-loading"
+      v-if="isLoading"
+    >
+      <van-loading />
+    </div>
     <!-- gutter -->
     <div class="gutter"></div>
     <!-- main -->
@@ -53,25 +60,18 @@ export default {
         const state = reactive({
             seriesId: "",
             name: "",
-            productList: []
+            productList: [],
+            isLoading: true
         });
+
+        state.isLoading = true;
 
         console.log("route=>", route);
 
-        const onLoad = (data) => (state.productList = data);
-
-        const init = async () => {
-            const { seriesId, name } = route.query;
-
-            state.seriesId = seriesId;
-            state.name = name;
-
-            const body = {};
-
-            const res = await _product.querySeriesProducts(body);
+        const onLoad = (data) => {
+            state.productList = data;
+            state.isLoading = false;
         };
-
-        init();
 
         provide("seriesId", state.seriesId);
 
@@ -93,4 +93,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.series-loading {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
