@@ -32,7 +32,7 @@
     <div class="search">
       <svg-icon
         class="svgicon"
-        icon-class="layout-nav-search"
+        :icon-class="searchIconClass"
         @click="handleClickSearchIcon"
       ></svg-icon>
     </div>
@@ -57,12 +57,27 @@
         @click="handleClickUserIcon"
       ></svg-icon>
     </div>
+    <!-- 下滑进入 -->
+    <transition name="van-fade">
+      <div
+        v-show="isSearchActive"
+        class="searchbox"
+      >
+        <van-search
+          v-model="searchValue"
+          placeholder="Search"
+          @search="onSearch"
+        />
+      </div>
+    </transition>
+
   </div>
+
 </template>
 
 
 <script>
-import { computed } from "vue";
+import { computed, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { TOGGLE_MENU_VISIBILITY_M } from "@/store/base/mutations";
@@ -73,17 +88,29 @@ export default {
 
         const store = useStore();
 
+        const state = reactive({
+            searchValue: "",
+            isSearchActive: false
+        });
+
         const handleClickMenuIcon = () => {
             store.commit(TOGGLE_MENU_VISIBILITY_M, true);
         };
         const handleClickLogoIcon = () => {
             router.push("/home");
         };
-        const handleClickSearchIcon = () => {};
+        const handleClickSearchIcon = () => {
+            state.isSearchActive = !state.isSearchActive;
+        };
         // 返回
         const handleClickBackIcon = () => router.back();
         const handleClickColIcon = () => {};
         const handleClickUserIcon = () => {};
+        const onSearch = (val) => {
+            console.log("=>", "onSearch", val);
+            alert(val);
+        };
+
         return {
             isBackShow: computed(() => {
                 const whiteList = ["/detail"];
@@ -91,12 +118,15 @@ export default {
                 console.log("route changed=>", route);
                 return whiteList.includes(path);
             }),
+            searchIconClass: computed(() => (state.isSearchActive ? "layout-nav-search-active" : "layout-nav-search")),
             handleClickMenuIcon,
             handleClickLogoIcon,
             handleClickSearchIcon,
             handleClickBackIcon,
             handleClickColIcon,
-            handleClickUserIcon
+            handleClickUserIcon,
+            onSearch,
+            ...toRefs(state)
         };
     }
 };
@@ -107,6 +137,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
+    position: relative;
     display: grid;
     grid-template-columns: 24px 24px auto 24px 24px [user];
     grid-template-rows: 1fr;
@@ -123,6 +154,10 @@ export default {
     .svgicon {
         width: 24px;
         height: 24px;
+    }
+
+    .search.active {
+        color: $button-color;
     }
 
     > div {
@@ -162,6 +197,44 @@ export default {
 }
 .box {
     line-height: 24px;
+}
+
+.searchbox ::v-deep {
+    position: absolute;
+    bottom: -48px;
+    right: 0;
+    height: 48px;
+    width: 100%;
+    padding: 6px $container-padding;
+    box-sizing: border-box;
+    background-color: $container-bg-0;
+    z-index: $sticky-index;
+
+    .van-search {
+        padding: 0;
+        .van-search__field {
+            flex-direction: row-reverse;
+            padding: 0;
+
+            .van-field__body {
+                height: 100%;
+                padding-right: 10px;
+            }
+            .van-field__left-icon {
+                background: $button-color;
+                border-radius: 0px 3px 3px 0px;
+                width: 40px;
+                height: 36px;
+                text-align: center;
+
+                .van-icon {
+                    line-height: 36px;
+                    color: $word-color-0;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
 }
 </style>
 

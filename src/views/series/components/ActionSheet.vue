@@ -100,5 +100,12 @@ export default {
     .van-popup {
         height: auto;
     }
+    .van-dropdown-menu__title.filter::after {
+        display: none;
+    }
+    .van-dropdown-menu__bar {
+        box-shadow: 0 3px 6px rgba(100, 101, 102, 0.12);
+        // box-shadow
+    }
 }
 </style>

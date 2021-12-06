@@ -43,6 +43,10 @@
   --main-word-color-4: #333333;
   --main-word-color-5: #1d1d1d;
 
+  /* zindex */
+  --main-sticky-index: 100;
+  --main-dropdown-index: 100;
+
   /* vant类 */
   --van-swipe-indicator-active-background-color: $container-bg-0;
   --van-swipe-indicator-inactive-background-color: rgba(255, 255, 255, 0.6);
@@ -50,10 +54,11 @@
   --van-grid-item-content-padding: var(--main-grid-padding-h)
     var(--main-grid-padding-v);
   --van-collapse-item-content-background-color: var(--main-footer-bg);
-  --van-sticky-z-index: 100;
+  --van-sticky-z-index: var(--main-sticky-index);
   --van-cell-vertical-padding: 12px;
   --van-radio-checked-icon-color: var(--main-radio-check-color);
   /* --van-button-primary-color: var(--main-button-color); */
   --van-button-primary-background-color: var(--main-button-color);
   --van-button-primary-border-color: var(--main-button-color);
+  --van-dropdown-item-z-index: var(--main-dropdown-index);
 }

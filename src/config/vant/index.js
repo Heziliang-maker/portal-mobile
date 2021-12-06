@@ -34,6 +34,7 @@ import {
   Radio,
   RadioGroup,
   CellGroup,
+  Search,
   //
   Lazyload,
 } from "vant";
@@ -66,6 +67,7 @@ import "vant/lib/cell/style";
 import "vant/lib/radio/style";
 import "vant/lib/radio-group/style";
 import "vant/lib/cell-group/style";
+import "vant/lib/search/style";
 
 // 引入 css变量(注意顺序:要在引入vant样式后进行覆盖)
 import "@/styles/vant/vant_cover.css";
@@ -100,6 +102,8 @@ export default function installVant(instance) {
   instance.use(Radio);
   instance.use(RadioGroup);
   instance.use(CellGroup);
+  instance.use(Search);
   //
   instance.use(Lazyload);
+ 
 }
