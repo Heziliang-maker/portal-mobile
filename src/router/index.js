@@ -32,6 +32,14 @@ const routes = [
           title: "详情",
         },
       },
+      {
+        name: "系列",
+        path: "/series",
+        component: () => import("@/views/series"),
+        meta: {
+          title: "系列",
+        },
+      },
 
       // {
       //   name: "更多",

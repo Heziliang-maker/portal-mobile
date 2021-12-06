@@ -9,3 +9,10 @@
   height: $gutter-height;
   background-color: $container-bg-2;
 }
+// overlay
+.van-popup {
+  width: 300px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 $container-padding;
+}

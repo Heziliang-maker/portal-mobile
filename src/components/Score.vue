@@ -36,7 +36,8 @@ export default {
     margin: 6px 0;
 }
 .score-star {
-    margin-right: 4px;
+    margin-right: 5px;
+    vertical-align: middle;
     // height: 30px;
 }
 .score-num {

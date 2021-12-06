@@ -40,21 +40,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 #container ::v-deep {
-    // @include DEBUG;
+    @include DEBUG;
     padding-top: $trans-height;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: $container-bg-0;
 
     .container-main {
-        min-height: 800px;
-    }
-
-    .menupop .van-popup {
-        width: 300px;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 0 $container-padding;
+        // min-height: 800px;
     }
 }
 </style>

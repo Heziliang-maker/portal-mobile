@@ -7,5 +7,6 @@
 
 import * as _analysis from "./analysis";
 import * as _translate from "./translate";
+import * as _product from "./product";
 
-export { _analysis, _translate };
+export { _analysis, _translate, _product };

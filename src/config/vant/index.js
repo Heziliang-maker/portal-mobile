@@ -27,6 +27,12 @@ import {
   Toast,
   Dialog,
   Notify,
+  DropdownMenu,
+  DropdownItem,
+  Switch,
+  Cell,
+  Radio,
+  RadioGroup,
   //
   Lazyload,
 } from "vant";
@@ -52,6 +58,12 @@ import "vant/lib/rate/style";
 import "vant/lib/toast/style";
 import "vant/lib/dialog/style";
 import "vant/lib/notify/style";
+import "vant/lib/dropdown-menu/style";
+import "vant/lib/dropdown-item/style";
+import "vant/lib/switch/style";
+import "vant/lib/cell/style";
+import "vant/lib/radio/style";
+import "vant/lib/radio-group/style";
 
 // 引入 css变量(注意顺序:要在引入vant样式后进行覆盖)
 import "@/styles/vant/vant_cover.css";
@@ -79,6 +91,12 @@ export default function installVant(instance) {
   instance.use(Toast);
   instance.use(Dialog);
   instance.use(Notify);
+  instance.use(DropdownMenu);
+  instance.use(DropdownItem);
+  instance.use(Switch);
+  instance.use(Cell);
+  instance.use(Radio);
+  instance.use(RadioGroup);
   //
   instance.use(Lazyload);
 }

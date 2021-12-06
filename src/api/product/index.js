@@ -15,6 +15,43 @@ export function queryPortalProducts(sort = null) {
     },
   });
 }
+// 查询产品系列
+export function queryPortalSeries() {
+  return request({
+    url: baseURL.admin + "/portal/add_portals_classify_name",
+    method: "post",
+  });
+}
+
+// 查询系列商品(搜索)
+export function querySeriesProducts({ asc, filter }) {
+  return request({
+    url: baseURL.admin + "/portal/query/release/product/detail/page",
+    method: "post",
+    data: {
+      query: {
+        filter: {
+          isOnMarket: true,
+          // maxPrice: 0,
+          // minPrice: 0,
+          // productName: 231321,
+
+          // classifyId: 123,
+          ...filter,
+        },
+        order: true,
+        orderBy: {
+          amt: true,
+        },
+        asc: asc,
+        pages: {
+          pageNum: 1,
+          pageSize: 999,
+        },
+      },
+    },
+  });
+}
 
 // 查询某个产品的详情
 export function queryProductsDetail({ productId, shopId }) {

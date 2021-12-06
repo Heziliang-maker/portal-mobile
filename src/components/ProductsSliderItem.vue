@@ -133,10 +133,11 @@
 import { inject, computed, nextTick, ref, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import Score from "@/components/Score.vue";
-
+import { UPDATE_LIST_ISVIEW_M } from "@/store/base/mutations";
 export default {
     name: "ProductsSliderItem",
     components: { Score },
+    // inject: ["seriesId"],
     props: {
         dataSource: {
             type: Object,
@@ -160,7 +161,12 @@ export default {
             love: true
         });
 
+        // const seriesId = inject("seriesId");
         const update = inject("update");
+
+        // const update = (productUrl) => {
+        //     store.commit(UPDATE_LIST_ISVIEW_M, { seriesId, productUrl });
+        // };
 
         const handleClickVideoPlayIcon = async (index, productUrl) => {
             console.log("=>", "emit a event");

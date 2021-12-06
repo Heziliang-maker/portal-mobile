@@ -5,13 +5,13 @@
 <template>
   <div
     v-for="menu in menuList"
-    :key="menu.id"
+    :key="menu.classifyId"
     class="menu"
   >
     <div
-      class="menu-main ellipsis"
-      @click="handleClickMenu(menu.title)"
-    >{{menu.title}}</div>
+      class="menu-main van-ellipsis"
+      @click="handleClickMenu(menu.classifyId,menu.classifyName)"
+    >{{menu.classifyName}}</div>
     <div class="menu-icon">
       <van-icon
         name="arrow"
@@ -24,35 +24,41 @@
 
 <script>
 import { computed, reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
 import variables from "@/styles/variables.scss";
-
-console.log("variables=>", variables);
+import { useStore } from "vuex";
+import { TOGGLE_MENU_VISIBILITY_M } from "@/store/base/mutations";
+// console.log("variables=>", variables);
 export default {
     name: "Menu",
-    setup() {
-        const state = reactive({
-            menuList: [
-                {
-                    id: 1,
-                    title: "Clothing＆Accessories"
-                },
-                {
-                    id: 2,
-                    title: "Electronic Digital"
-                },
-                {
-                    id: 3,
-                    title: "Outdoor＆Garden"
-                }
-            ]
-        });
 
-        const handleClickMenu = (title) => {
-            console.log("点击菜单=>", title);
+    setup(props, context) {
+        const router = useRouter();
+
+        const state = reactive({});
+
+        const store = useStore();
+
+        const closeOverlay = () => {
+            store.commit(TOGGLE_MENU_VISIBILITY_M, false);
+        };
+
+        const handleClickMenu = (seriesId, name) => {
+            // close
+            closeOverlay();
+            // router push
+            router.push({
+                path: "/series",
+                query: {
+                    seriesId,
+                    name
+                }
+            });
         };
 
         return {
             variables: computed(() => variables),
+            menuList: computed(() => store.state.seriesList),
             handleClickMenu,
             ...toRefs(state)
         };

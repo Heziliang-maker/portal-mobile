@@ -123,10 +123,11 @@
 import { inject, computed, nextTick, ref, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import Score from "@/components/Score.vue";
-
+import { UPDATE_LIST_ISVIEW_M } from "@/store/base/mutations";
 export default {
     name: "ProductsGridItem",
     components: { Score },
+    inject: ["seriesId"],
     props: {
         dataSource: {
             type: Object,
@@ -142,7 +143,11 @@ export default {
             love: true
         });
 
-        const update = inject("update");
+        const seriesId = inject("seriesId");
+
+        const update = (productUrl) => {
+            store.commit(UPDATE_LIST_ISVIEW_M, { seriesId, productUrl });
+        };
 
         const handleClickVideoPlayIcon = async (index, productUrl) => {
             console.log("=>", "emit a event");
@@ -173,7 +178,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.grid-item ::v-deep {
+.grid-item {
     .item-pic {
         background-color: $container-bg-2;
         overflow: hidden;
@@ -220,12 +225,15 @@ export default {
             z-index: 99;
             width: 28px;
             height: 28px;
-            line-height: 28px;
+
             text-align: center;
             border-radius: 100%;
             background: $container-bg-0;
             border: 1px solid $border-color-3;
+            line-height: 28px;
+            font-size: 0;
             img {
+                vertical-align: middle;
                 height: 16px;
                 height: 16px;
             }

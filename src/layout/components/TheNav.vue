@@ -8,7 +8,20 @@
  * @Description: Nav组件
 -->
 <template>
-  <div class="nav">
+  <div
+    class="nav"
+    :class="{'show':isBackShow}"
+  >
+    <div
+      class="back"
+      v-if="isBackShow"
+    >
+      <svg-icon
+        class="svgicon"
+        icon-class="layout-nav-back"
+        @click="handleClickBackIcon"
+      ></svg-icon>
+    </div>
     <div class="menu">
       <svg-icon
         class="svgicon"
@@ -25,6 +38,7 @@
     </div>
     <div class="logo">
       <img
+        @click="handleClickLogoIcon"
         src="@/assets/images/layout-nav/header-logo.webp"
         alt="buykop-logo"
       >
@@ -48,19 +62,42 @@
 
 
 <script>
+import { computed } from "vue";
 import { useStore } from "vuex";
-import { TOGGLE_MENU_VISIBILITY } from "@/store/base/mutations";
+import { useRoute, useRouter } from "vue-router";
+import { TOGGLE_MENU_VISIBILITY_M } from "@/store/base/mutations";
 export default {
     setup() {
+        const route = useRoute();
+        const router = useRouter();
+
         const store = useStore();
 
         const handleClickMenuIcon = () => {
-            store.commit(TOGGLE_MENU_VISIBILITY, true);
+            store.commit(TOGGLE_MENU_VISIBILITY_M, true);
+        };
+        const handleClickLogoIcon = () => {
+            router.push("/home");
         };
         const handleClickSearchIcon = () => {};
+        // 返回
+        const handleClickBackIcon = () => router.back();
         const handleClickColIcon = () => {};
         const handleClickUserIcon = () => {};
-        return { handleClickMenuIcon, handleClickSearchIcon, handleClickColIcon, handleClickUserIcon };
+        return {
+            isBackShow: computed(() => {
+                const whiteList = ["/detail"];
+                const path = route.path;
+                console.log("route changed=>", route);
+                return whiteList.includes(path);
+            }),
+            handleClickMenuIcon,
+            handleClickLogoIcon,
+            handleClickSearchIcon,
+            handleClickBackIcon,
+            handleClickColIcon,
+            handleClickUserIcon
+        };
     }
 };
 </script>
@@ -92,6 +129,10 @@ export default {
         font-size: 0;
     }
 }
+.nav.show {
+    grid-template-columns: 24px 24px 24px auto 24px 24px [user];
+    grid-template-areas: "back menu search logo col user";
+}
 
 .menu {
     grid-area: menu;
@@ -99,6 +140,9 @@ export default {
 
 .user {
     grid-area: user;
+}
+.back {
+    grid-area: back;
 }
 
 .search {

@@ -23,7 +23,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     const res = response.data;
-    if (res.code === 200000) {
+    if (res.errorCode === 200000) {
       //正常响应====>
       return res;
     } else {

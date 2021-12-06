@@ -66,7 +66,6 @@ export default {
         watch(
             () => props.scrollList,
             async (newValue, oldValue) => {
-                console.log("newValue=>", newValue);
                 await nextTick();
                 const wrapper = wrapperRef.value;
                 state.bs = new BScroll(wrapper, {

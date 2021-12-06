@@ -15,10 +15,15 @@ $container-bg-0: var(--main-container-bg-0);
 $container-bg-1: var(--main-container-bg-1);
 // 容器背景色3
 $container-bg-2: var(--main-container-bg-2);
+// 容器背景色3
+$container-bg-3: var(--main-container-bg-3);
+// 容器背景色4
+$container-bg-4: var(--main-container-bg-4);
 // 边框色
 $border-color-1: var(--main-border-color-1);
 $border-color-2: var(--main-border-color-2);
 $border-color-3: var(--main-border-color-3);
+$border-color-4: var(--main-border-color-4);
 
 // outline color
 $outline-color-1: #00cec9;
@@ -32,6 +37,10 @@ $word-color-1: var(--main-word-color-1);
 $word-color-2: var(--main-word-color-2);
 $word-color-3: var(--main-word-color-3);
 $word-color-4: var(--main-word-color-4);
+$word-color-5: var(--main-word-color-5);
+
+// z-index
+$sticky-index: var(--van-sticky-z-index);
 
 // 圆角
 $radius: var(--main-border-radius);

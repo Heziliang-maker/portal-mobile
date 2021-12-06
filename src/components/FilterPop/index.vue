@@ -5,36 +5,36 @@
 <template>
   <!-- popup -->
   <van-popup
-    overlay-class='menu'
-    v-model:show="isMenuShow"
+    v-model:show="isFilterShow"
     close-on-popstate
     close-on-click-overlay
-    position="left"
     safe-area-inset-bottom
+    position="right"
     teleport="body"
   >
-    <Menu />
+    <Filter />
   </van-popup>
 </template>
 
 <script>
 import { useStore } from "vuex";
 import { computed } from "@vue/reactivity";
-import { TOGGLE_MENU_VISIBILITY_M } from "@/store/base/mutations";
+import { TOGGLE_FILTER_VISIBILITY_M } from "@/store/base/mutations";
 import { reactive, toRefs } from "vue";
 
-import Menu from "./Menu.vue";
+import Filter from "./Filter.vue";
 
 export default {
-    name: "MenuPop",
-    components: { Menu },
+    name: "FilterPop",
+    components: { Filter },
     setup() {
         const store = useStore();
 
         return {
-            isMenuShow: computed({
-                get: () => store.state.isMenuShow,
-                set: (v) => store.commit(TOGGLE_MENU_VISIBILITY_M, v)
+            isFilterShow: computed({
+                // get: () => store.state.isFilterShow,
+                get: () => store.state.isFilterShow,
+                set: (v) => store.commit(TOGGLE_FILTER_VISIBILITY_M, v)
             })
         };
     }

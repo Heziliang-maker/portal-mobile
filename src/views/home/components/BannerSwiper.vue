@@ -31,22 +31,15 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
     name: "BannerSwiper",
-    props: {
-        bannerList: {
-            type: Array,
-            default: () => []
-        }
-    },
     setup() {
-        const state = reactive({
-            count: 0
-        });
+        const store = useStore();
 
         return {
-            ...toRefs(state)
+            bannerList: computed(() => store.state.bannerList)
         };
     }
 };
@@ -55,12 +48,8 @@ export default {
 <style lang="scss" scoped>
 .banner-swiper ::v-deep {
     .van-swipe-item {
-        color: #fff;
-        font-size: 20px;
-        line-height: 150px;
-        text-align: center;
         height: 180px;
-        width: 343px;
+        width: 345px;
     }
 }
 </style>

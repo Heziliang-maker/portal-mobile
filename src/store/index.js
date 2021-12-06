@@ -8,6 +8,7 @@ import { createStore } from "vuex";
 import getters from "./base/getters";
 import state from "./base/state";
 import mutations from "./base/mutations";
+import actions from "./base/actions";
 import modules from "./modules";
 
 export default createStore({
@@ -15,4 +16,5 @@ export default createStore({
   getters,
   mutations,
   modules,
+  actions,
 });

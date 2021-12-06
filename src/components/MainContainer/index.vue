@@ -12,7 +12,10 @@
       <slot name="content"></slot>
     </section>
 
-    <section class="footer">
+    <section
+      class="footer"
+      v-if="showFooter"
+    >
       <slot name="footer">
         <van-button
           :color="variables.buttonMainColor"
@@ -33,6 +36,12 @@ console.log("variables=>", variables);
 export default {
     name: "MainContainer",
     emits: ["onLickMore"],
+    props: {
+        showFooter: {
+            type: Boolean,
+            default: true
+        }
+    },
     setup(prop, { emit }) {
         const handleClickSeeMore = () => emit("onLickMore");
         return {
