@@ -11,4 +11,5 @@ export default {
   rate: 1.2,
   bannerList: [],
   seriesList: [],
+  seriesIndexList: [],
 };

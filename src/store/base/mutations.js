@@ -5,6 +5,7 @@
 export const TOGGLE_FOOTER_VISIBILITY_M = "TOGGLE_FOOTER_VISIBILITY_M";
 export const TOGGLE_FILTER_VISIBILITY_M = "TOGGLE_FILTER_VISIBILITY_M";
 export const QUERY_PORTAL_M = "QUERY_PORTAL_M";
+export const QUERY_PORTAL_SERIES_M = "QUERY_PORTAL_SERIES_M";
 
 export const TOGGLE_MENU_VISIBILITY_M = "TOGGLE_MENU_VISIBILITY_M";
 export const UPDATE_LIST_ISVIEW_M = "UPDATE_LIST_ISVIEW_M";
@@ -40,5 +41,8 @@ export default {
     const [bannerList, seriesList] = payload;
     state.bannerList = bannerList;
     state.seriesList = seriesList;
+  },
+  [QUERY_PORTAL_SERIES_M](state, payload) {
+    state.seriesIndexList = payload;
   },
 };

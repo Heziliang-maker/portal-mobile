@@ -39,6 +39,7 @@
 <script>
 import { reactive, provide, computed, toRefs } from "vue";
 import { useStore } from "vuex";
+import { _product } from "@/api";
 import BannerSwiper from "./components/BannerSwiper";
 import ProductsGridSection from "./components/ProductsGridSection.vue";
 import ProductsSliderSection from "./components/ProductsSliderSection.vue";
@@ -49,7 +50,10 @@ export default {
     name: "Home",
     components: { BannerSwiper, ProductsGridSection, ProductsSliderSection, CategoriesSection },
     setup() {
-        const state = reactive({});
+        const state = reactive({
+            seriesList: []
+        });
+        
 
         // const store = useStore();
 

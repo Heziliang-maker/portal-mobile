@@ -53,4 +53,7 @@
   --van-sticky-z-index: 100;
   --van-cell-vertical-padding: 12px;
   --van-radio-checked-icon-color: var(--main-radio-check-color);
+  /* --van-button-primary-color: var(--main-button-color); */
+  --van-button-primary-background-color: var(--main-button-color);
+  --van-button-primary-border-color: var(--main-button-color);
 }

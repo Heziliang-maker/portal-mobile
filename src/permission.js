@@ -9,7 +9,7 @@ import router from "@/router";
 import store from "@/store";
 // =>引入mutaions
 import { TOGGLE_FOOTER_VISIBILITY_M } from "./store/base/mutations";
-import { QUERY_PORTAL_A } from "./store/base/actions";
+import { QUERY_PORTAL_A, QUERY_PORTAL_SERIES_A } from "./store/base/actions";
 // =>引入获取页面标题函数
 import { getPageTitle } from "@/utils/tools";
 
@@ -26,6 +26,8 @@ router.beforeEach(async (to, from) => {
     console.log("=>", "refreshed");
     // refresh
     await store.dispatch(QUERY_PORTAL_A);
+    //
+    await store.dispatch(QUERY_PORTAL_SERIES_A);
   }
 
   // next((vm) => {

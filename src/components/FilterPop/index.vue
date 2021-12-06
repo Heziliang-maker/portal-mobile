@@ -12,7 +12,7 @@
     position="right"
     teleport="body"
   >
-    <Filter />
+    <Filter @submit="submit" />
   </van-popup>
 </template>
 
@@ -27,15 +27,19 @@ import Filter from "./Filter.vue";
 export default {
     name: "FilterPop",
     components: { Filter },
-    setup() {
+    emits: ["submit"],
+    setup(props, context) {
         const store = useStore();
+
+        const submit = (payload) => context.emit("submit", payload);
 
         return {
             isFilterShow: computed({
                 // get: () => store.state.isFilterShow,
                 get: () => store.state.isFilterShow,
                 set: (v) => store.commit(TOGGLE_FILTER_VISIBILITY_M, v)
-            })
+            }),
+            submit
         };
     }
 };

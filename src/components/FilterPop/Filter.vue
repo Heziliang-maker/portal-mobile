@@ -44,16 +44,31 @@
     <div class="filter-custom">
       <van-cell-group inset>
         <van-field
+          :disabled="!isAnyAble"
           v-model="min"
           label="LOW"
           placeholder="From"
+          type="digit"
         />
         <van-field
+          :disabled="!isAnyAble"
           v-model="max"
           label="High"
           placeholder="To"
+          type="digit"
         />
       </van-cell-group>
+    </div>
+    <div class="filter-btn">
+      <van-button
+        plain
+        type="primary"
+        @click="handleClickCancel"
+      >Cancel</van-button>
+      <van-button
+        type="primary"
+        @click="handleClickApply"
+      >Apply</van-button>
     </div>
 
   </div>
@@ -69,12 +84,14 @@ import { TOGGLE_FILTER_VISIBILITY_M } from "@/store/base/mutations";
 
 export default {
     name: "Menu",
-
+    emits: ["submit"],
     setup(props, context) {
         const router = useRouter();
 
         const state = reactive({
-            checked: "1"
+            checked: "1",
+            min: "",
+            max: ""
         });
 
         const store = useStore();
@@ -83,16 +100,33 @@ export default {
             store.commit(TOGGLE_FILTER_VISIBILITY_M, false);
         };
 
-        const handleClickMenu = () => {
-            // close
+        const handleClickCancel = () => {
+            state.checked = "1";
+            state.min = state.max = "";
+
             closeOverlay();
-            // router push
+        };
+        const handleClickApply = () => {
+            const checkedMap = {
+                1: { min: 0, max: 25 },
+                2: { min: 25, max: 50 },
+                3: { min: 50, max: 100 },
+                4: { min: 100, max: "" },
+                5: { min: state.min, max: state.max }
+            };
+
+            const result = checkedMap[state.checked];
+
+            context.emit("submit", result);
+
+            closeOverlay();
         };
 
         return {
             variables: computed(() => variables),
-            menuList: computed(() => store.state.seriesList),
-            handleClickMenu,
+            isAnyAble: computed(() => state.checked === "5"),
+            handleClickCancel,
+            handleClickApply,
             ...toRefs(state)
         };
     }
@@ -104,6 +138,7 @@ export default {
     height: 100%;
     padding-top: 24px;
     box-sizing: border-box;
+    position: relative;
     .filter-header {
         @include font-b(14px, $word-color-1);
         line-height: 20px;
@@ -123,10 +158,19 @@ export default {
     .filter-custom {
         .van-field {
             padding-left: 0;
-            // width: 40px;
             .van-cell__title {
                 width: 40px;
             }
+        }
+    }
+    .filter-btn {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        bottom: 34px;
+        .van-button {
+            width: 130px;
         }
     }
 }

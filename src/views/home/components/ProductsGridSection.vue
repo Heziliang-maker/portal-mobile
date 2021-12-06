@@ -5,7 +5,7 @@
 <template>
   <MainContainer
     v-bind="$attrs"
-    @onClickMore="onClickMore"
+    :series="series"
   >
     <template #title>
       {{series.classifyName}}
@@ -26,6 +26,7 @@
 <script>
 import { reactive, provide, toRefs, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import BetterScrollView from "@/components/BetterScrollView";
 
 import MainContainer from "@/components/MainContainer";
@@ -44,10 +45,6 @@ export default {
     setup(props, context) {
         const store = useStore();
 
-        const onClickMore = () => {
-            console.log("=>", "onLickMore");
-        };
-
         provide("seriesId", props.seriesId);
 
         return {
@@ -57,8 +54,7 @@ export default {
                         classifyName: "",
                         classifyList: []
                     }
-            ),
-            onClickMore
+            )
         };
     }
 };

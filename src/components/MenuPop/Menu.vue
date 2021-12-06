@@ -58,7 +58,7 @@ export default {
 
         return {
             variables: computed(() => variables),
-            menuList: computed(() => store.state.seriesList),
+            menuList: computed(() => store.state.seriesIndexList),
             handleClickMenu,
             ...toRefs(state)
         };

@@ -31,19 +31,34 @@
 <script>
 import { computed } from "vue";
 import variables from "@/styles/variables.scss";
+import { useRouter } from "vue-router";
 
 console.log("variables=>", variables);
 export default {
     name: "MainContainer",
-    emits: ["onLickMore"],
     props: {
         showFooter: {
             type: Boolean,
             default: true
+        },
+        series: {
+            type: Object
         }
     },
-    setup(prop, { emit }) {
-        const handleClickSeeMore = () => emit("onLickMore");
+    setup(props, context) {
+        const router = useRouter();
+
+        const handleClickSeeMore = () => {
+            const { classifyName: name, classifyId: seriesId } = props.series;
+            router.push({
+                path: "/series",
+                query: {
+                    seriesId,
+                    name
+                }
+            });
+        };
+
         return {
             handleClickSeeMore,
             variables: computed(() => variables)

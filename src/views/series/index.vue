@@ -7,7 +7,7 @@
   <div class="series">
     <!-- header -->
     <div class="series-header">
-      <ActionSheet />
+      <ActionSheet @load="onLoad" />
     </div>
     <!-- gutter -->
     <div class="gutter"></div>
@@ -15,12 +15,12 @@
     <div class="series-main">
       <MainContainer :showFooter="false">
         <template #title>
-          {{series.classifyName}}
+          {{name}}
         </template>
         <template #content>
           <ProductsGrid
             class="grid"
-            :grid-list="series.productList"
+            :grid-list="productList"
           >
             <template #item="{item}">
               <ProductsGridItem :data-source="item" />
@@ -35,7 +35,7 @@
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { watch, reactive, provide, toRefs, computed } from "vue";
+import { watch, reactive, provide, toRefs, computed, ref } from "vue";
 import BetterScrollView from "@/components/BetterScrollView";
 import { _product } from "@/api";
 import MainContainer from "@/components/MainContainer";
@@ -45,7 +45,7 @@ import ActionSheet from "./components/ActionSheet.vue";
 export default {
     name: "Series",
     components: { BetterScrollView, MainContainer, ProductsGrid, ProductsGridItem, ActionSheet },
-    setup() {
+    setup(props, context) {
         const route = useRoute();
         const router = useRouter();
         const store = useStore();
@@ -53,17 +53,12 @@ export default {
         const state = reactive({
             seriesId: "",
             name: "",
-            filter: {
-                maxPirce: null,
-                minPirce: null,
-                productName: null,
-                classifyId: null
-            },
-            asc: false,
-            seriesList: []
+            productList: []
         });
 
         console.log("route=>", route);
+
+        const onLoad = (data) => (state.productList = data);
 
         const init = async () => {
             const { seriesId, name } = route.query;
@@ -80,9 +75,7 @@ export default {
 
         provide("seriesId", state.seriesId);
 
-        watch(route, (newValue, oldValue) => {
-            init();
-        });
+        watch(route, (newValue, oldValue) => {});
 
         return {
             ...toRefs(state),
@@ -92,7 +85,8 @@ export default {
                         classifyName: "",
                         classifyList: []
                     }
-            )
+            ),
+            onLoad
         };
     }
 };
