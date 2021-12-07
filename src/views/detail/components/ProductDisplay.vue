@@ -17,12 +17,6 @@
           alt="播放该视频"
           @click.stop="handleClickVideoPlayIcon"
         >
-        <!-- <van-icon
-          name="play-circle-o"
-          size="50"
-          color="#f6f6f5"
-          @click="handleClickVideoPlayIcon"
-        /> -->
       </div>
       <transition name="van-fade">
         <div
@@ -70,23 +64,27 @@
     </div>
     <!-- 商品下部滚动列表 -->
     <div class="product-slide">
-      <div
-        class="wrapper"
-        ref="wrapperRef"
+      <BetterScrollView
+        key="slide"
+        :scroll-list='dataSource.pics'
+        targetClass="slide"
+        columnKey="url"
       >
-        <div class="group-img">
-          <template v-for="(item, index) in dataSource.pics">
-            <div
-              class="img-box"
-              :class="{ 'img-box-check': curMainImageIndex == index }"
-              :style="{
-                    backgroundImage: 'url(' + item.url + ')',
-                  }"
+        <template #item="{item:slideItem,index}">
+          <div
+            class="product-slide__item"
+            :class="{active:selectedKey==='slide' && curMainImageIndex===index}"
+          >
+            <van-image
               @click="changeImage(index)"
-            ></div>
-          </template>
-        </div>
-      </div>
+              width="100%"
+              height="100%"
+              fit="contain"
+              :src="slideItem.url"
+            />
+          </div>
+        </template>
+      </BetterScrollView>
     </div>
     <!-- 商品名称 -->
     <div class="product-name">{{ dataSource.name }}</div>
@@ -106,14 +104,13 @@
           <span
             v-if="dataSource.retailPrice "
             class="now-price__store"
-          >{{ dataSource.retailPrice + "" + dataSource.ccy }}</span>
-          <!-- <a class="now-price__local">{{ $translatePriceRate(nowPrice) }}</a> -->
+          >{{ dataSource.ccy + " " + dataSource.retailPrice}}</span>
         </div>
         <span
           class="origin-price"
           v-if="dataSource.originalPrice"
         >
-          {{ dataSource.originalPrice + "" + dataSource.ccy }}
+          {{ dataSource.ccy  + " " + dataSource.originalPrice }}
 
         </span>
       </div>
@@ -131,14 +128,16 @@
       <div class="product-sku__title">Color</div>
       <div class="product-sku__wrapper">
         <BetterScrollView
+          key="sku"
           :scroll-list='color'
           targetClass="box"
           columnKey="url"
         >
-          <template #item="{item:colorItem}">
+          <template #item="{item:colorItem,index}">
             <div
               class="product-sku__item"
-              @click="handleClickColor(colorItem)"
+              :class="{active:selectedKey==='sku' && curMainImageIndex===index}"
+              @click="handleClickColor(colorItem,index)"
             >
               <!-- <van-image
                 width="100%"
@@ -147,6 +146,7 @@
                 lazy-load
                 :src="item.url"
               /> -->
+
               {{colorItem}}
             </div>
           </template>
@@ -199,16 +199,16 @@ export default {
         const state = reactive({
             curMainImageIndex: 0,
             isView: false,
-            bs: null,
-            mainImages: []
+            mainImages: [],
+            selectedKey: "slide" //slide sku
         });
 
-        const wrapperRef = ref(null);
         const videoRef = ref(null);
         const swiperRef = ref(null);
 
         const onSwiperChange = (index) => {
             state.curMainImageIndex = index;
+            state.selectedKey = "slide";
         };
 
         // const images = computed(() => props.dataSource.pics);
@@ -224,7 +224,7 @@ export default {
             state.mainImages = props.dataSource.pics;
 
             state.curMainImageIndex = index;
-
+            state.selectedKey = "slide";
             swiperRef.value.swipeTo(index);
         };
 
@@ -264,9 +264,11 @@ export default {
             return props.dataSource.pics[0].url;
         };
 
-        const handleClickColor = (color) => {
+        const handleClickColor = (color, index) => {
             const pic = getColorSkuImg(color);
             state.mainImages = [{ url: pic }];
+            state.selectedKey = "sku";
+            state.curMainImageIndex = index;
         };
 
         onBeforeUnmount(() => {
@@ -292,18 +294,11 @@ export default {
                 console.log("=>", "watch..");
                 state.mainImages = props.dataSource.pics;
                 await nextTick();
-                state.bs = new BScroll(wrapperRef.value, {
-                    scrollX: true,
-                    // probeType: 3,
-                    bounce: true,
-                    eventPassthrough: "vertical"
-                });
             },
             { immediate: true }
         );
 
         return {
-            wrapperRef,
             videoRef,
             swiperRef,
             ...toRefs(state),
@@ -345,15 +340,10 @@ export default {
         }
         .product-main-swipe {
             width: 375px;
-
             .van-image {
                 width: 375px;
                 height: 375px;
             }
-        }
-        .van-swipe-item {
-            // width: 375px !important;
-            // height: 375px !important;
         }
 
         // 悬浮视频控件
@@ -385,32 +375,31 @@ export default {
         }
     }
     .product-slide {
-        padding: $container-padding;
         width: 100%;
         box-sizing: border-box;
-        .wrapper {
-            position: relative;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            .group-img {
-                display: inline-block;
-                .img-box {
-                    display: inline-block;
-                    width: 78px;
-                    min-width: 78px;
-                    height: 78px;
-                    background-position: center;
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    margin-right: 12px;
-                    border-radius: 2px;
-                    border: 1px #fff solid;
-                }
-                .img-box-check {
-                    border: 1px #d8d8d8 solid;
-                }
-            }
+
+        .product-slide__item {
+            border: 1px solid $theme-color;
+            padding: 1px;
+            border-radius: 4px;
+        }
+        .slide {
+            margin-right: 8px;
+        }
+        .slide:first-of-type {
+            margin-left: 0;
+        }
+
+        .product-slide__item {
+            width: 56px;
+            height: 56px;
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            padding: 1px;
+            border-radius: 4px;
+        }
+        .product-slide__item.active {
+            border-color: $theme-color;
         }
     }
     .product-name {
@@ -438,8 +427,9 @@ export default {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            border-top: 1px dashed red;
-            border-bottom: 1px dashed red;
+            border-top: 1px dashed #d5d0bf;
+            border-bottom: 1px dashed #d5d0bf;
+            background-color: #f5f3ed;
         }
         // margin-bottom: 30px;
         .now-price {
@@ -488,27 +478,37 @@ export default {
 
         .container-wrapper {
             font-size: 0;
+
+            .box {
+                margin-right: $container-padding;
+            }
+            .box:first-of-type {
+                margin-left: 0;
+            }
+
+            .box:last-of-type {
+                margin-right: 0;
+            }
         }
 
         .product-sku__title {
             width: $title-width;
             @include font-n();
-            margin-right: $container-padding;
         }
         .product-sku__wrapper {
             width: calc(100% - #{$title-width} - #{$gap});
         }
+
         .product-sku__item {
-            @include font-n();
-            margin-right: $container-padding;
-            // width: 32px;
-            // height: 32px;
+            @include font-b(14px);
+            line-height: 20px;
+            padding: 6px 8px;
+            border: 1px solid #e9e8e8;
+            border-radius: $radius;
         }
-        .box:first-of-type {
-            margin-left: 0;
-        }
-        .box:last-of-type {
-            margin-right: 0;
+        .product-sku__item.active {
+            border-color: $theme-color;
+            color: $theme-color;
         }
     }
     .product-brand {
