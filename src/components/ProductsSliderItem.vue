@@ -98,10 +98,7 @@
 
       <div class="item-price notranslate">
         <div class="current">
-          <p
-            class="current-price"
-            v-html="$filter.priceGroup(dataSource.retailPrice)"
-          ></p>
+          <p class="current-price">{{ccy+''+dataSource.retailPrice}}</p>
           <p
             class="local-price"
             v-if="rate&&rate!=1&&ccy!=='$'"
@@ -120,10 +117,8 @@
           v-html="$filter.countFix(dataSource.reamt)"
         ></p>
       </div>
-      <div
-        class="item-name"
-        v-html="dataSource.productName"
-      >
+      <div class="item-name van-multi-ellipsis--l2">
+        {{dataSource.productName}}
       </div>
       <Score
         class="item-score"
@@ -151,12 +146,10 @@ export default {
             default: () => {}
         },
         groupIndex: {
-            type: Number,
-            required: true
+            type: Number
         },
         selfIndex: {
-            type: Number,
-            required: true
+            type: Number
         }
     },
     setup(props, context) {
@@ -168,8 +161,9 @@ export default {
             love: true
         });
 
-        const update = inject("update");
-
+        const update = (productUrl) => {
+            store.commit(UPDATE_LIST_ISVIEW_M, { seriesId, productUrl });
+        };
         const handleClickVideoPlayIcon = async (index, productUrl) => {
             update(productUrl);
 
@@ -203,9 +197,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$type2-img-width: 160px;
-$type2-img-height: 160px;
-$type3-img-width: 104px;
+$type2-img-side-length: 160px;
+$type3-img-side-length: 104px;
 $type3-img-height: 104px;
 $type2-section-left-width: 180px;
 $type3-section-left-width: 116px;
@@ -227,14 +220,11 @@ $type3-pic-padding: 6px;
     }
 
     .item-name {
-        width: 100%;
         white-space: pre-wrap;
         @include font-n(13px, $word-color-2);
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        word-break: break-all;
+        max-width: calc(#{$type2-img-side-length} + #{$type2-pic-padding} * 2);
+
         line-height: 19px;
         margin-bottom: 2px;
     }
@@ -271,8 +261,8 @@ $type3-pic-padding: 6px;
         }
 
         .van-img {
-            width: $type2-img-width;
-            height: $type2-img-height;
+            width: $type2-img-side-length;
+            height: $type2-img-side-length;
             border-radius: $radius;
             background-color: $container-bg-0;
         }
@@ -374,9 +364,12 @@ $type3-pic-padding: 6px;
     .item-pic {
         padding: $type3-pic-padding;
     }
+    .item-name {
+        max-width: calc(#{$type3-img-side-length} + #{$type3-pic-padding} * 2);
+    }
     .van-img {
-        width: $type3-img-width !important;
-        height: $type3-img-height !important;
+        width: $type3-img-side-length !important;
+        height: $type3-img-side-length !important;
     }
 
     .van-img > img {

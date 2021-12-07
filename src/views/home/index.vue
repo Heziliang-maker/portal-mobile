@@ -15,6 +15,10 @@
   <section class="hot-new">
     <ProductsSliderSection :series-id="2" />
   </section>
+  <!-- clothing -->
+  <section class="outdoor-garden">
+    <ProductsSliderComplexSection :series-id="7" />
+  </section>
   <!-- gutter -->
   <div class="gutter"></div>
   <!-- Shop By Categories -->
@@ -23,10 +27,7 @@
   </section>
   <!-- gutter -->
   <div class="gutter"></div>
-  <!-- clothing -->
-  <section class="outdoor-garden">
-    <ProductsGridSection :series-id="3" />
-  </section>
+
   <!-- clothing -->
   <section class="outdoor-garden">
     <ProductsGridSection :series-id="4" />
@@ -65,11 +66,18 @@ import { _product } from "@/api";
 import BannerSwiper from "./components/BannerSwiper";
 import ProductsGridSection from "./components/ProductsGridSection.vue";
 import ProductsSliderSection from "./components/ProductsSliderSection.vue";
+import ProductsSliderComplexSection from "./components/ProductsSliderComplexSection.vue";
 import CategoriesSection from "./components/CategoriesSection.vue";
 import { QUERY_PORTAL_A } from "@/store/base/actions";
 export default {
     name: "Home",
-    components: { BannerSwiper, ProductsGridSection, ProductsSliderSection, CategoriesSection },
+    components: {
+        BannerSwiper,
+        ProductsGridSection,
+        ProductsSliderSection,
+        ProductsSliderComplexSection,
+        CategoriesSection
+    },
     setup() {
         const state = reactive({
             seriesList: [],

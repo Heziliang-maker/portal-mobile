@@ -69,7 +69,8 @@ export default {
 
 <style lang="scss" scoped>
 .grid ::v-deep {
-    padding-top: $grid-padding-h;
+    // padding-top: $grid-padding-h;
+    padding-top: $container-padding;
     padding-bottom: 24px;
     .header {
         @include font-b(20px);

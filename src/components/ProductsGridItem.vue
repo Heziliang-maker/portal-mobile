@@ -3,7 +3,10 @@
  * @Description: ProductsGridItem
 -->
 <template>
-  <div class="grid-item">
+  <div
+    class="grid-item"
+    :class="{'complex':complex}"
+  >
     <div class="item-pic">
       <!-- 视频播放按钮 -->
       <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
@@ -63,9 +66,6 @@
         </div>
       </transition>
       <van-image
-        class="van-img"
-        :width="158"
-        :height="158"
         :src="dataSource.productImg"
         fit="cover"
         lazy-load
@@ -82,7 +82,7 @@
     <div class="item-price notranslate">
       <div class="current">
         <p class="current-price">
-          {{dataSource.retailPrice}}</p>
+          {{ccy +''+ dataSource.retailPrice}}</p>
         <p
           class="local-price"
           v-if="rate&&rate!=1&&ccy!=='$'"
@@ -93,18 +93,13 @@
           class="gap"
         ></div>
       </div>
-      <!-- <span>
-              ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>
-            </span> -->
       <p
         class="origin"
         v-html="$filter.countFix(dataSource.reamt)"
       ></p>
     </div>
-    <div
-      class="item-name"
-      v-html="dataSource.productName"
-    >
+    <div class="item-name van-multi-ellipsis--l2">
+      {{ dataSource.productName}}
     </div>
     <Score
       class="item-score"
@@ -130,6 +125,11 @@ export default {
         dataSource: {
             type: Object,
             default: () => {}
+        },
+        // 复杂模式下的GridItem
+        complex: {
+            type: Boolean,
+            default: false
         }
     },
     setup(props, { emit }) {
@@ -176,36 +176,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$img-side-length: 158px;
+$complex-img-side-length: 132px;
+$padding: 8px;
+
 .grid-item {
     .item-pic {
         background-color: $container-bg-2;
         overflow: hidden;
         margin-bottom: 7px;
-        padding: 8px;
+        padding: $padding;
         box-sizing: border-box;
         width: 100%;
-        .van-img {
+        .van-image {
+            width: $img-side-length;
+            height: $img-side-length;
             border-radius: $radius;
             background-color: $container-bg-0;
         }
-
-        .van-img > img {
-            width: 100%;
-            height: 100%;
-        }
     }
     .item-name {
-        flex: 0 0 158px;
+        white-space: pre-wrap;
+        max-width: calc(#{$img-side-length} + #{$padding} * 2);
         box-sizing: border-box;
         font-size: 12px;
         @include font-n(13px, $word-color-2);
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        text-overflow: ellipsis;
         line-height: 17px;
         margin-bottom: 2px;
+        // word-break: break-all;
     }
 
     .item-score {
@@ -302,6 +300,16 @@ export default {
             @include font-n(10px, #999999);
             margin-bottom: 2px;
         }
+    }
+}
+
+.grid-item.complex {
+    .item-name {
+        max-width: calc(#{$complex-img-side-length} + #{$padding} * 2);
+    }
+    .van-image {
+        width: $complex-img-side-length;
+        height: $complex-img-side-length;
     }
 }
 </style>
