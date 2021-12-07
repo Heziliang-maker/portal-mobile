@@ -13,7 +13,7 @@
   </section>
   <!-- hot-new -->
   <section class="hot-new">
-    <ProductsSliderSection />
+    <ProductsSliderSection :series-id="2" />
   </section>
   <!-- gutter -->
   <div class="gutter"></div>
@@ -25,15 +25,35 @@
   <div class="gutter"></div>
   <!-- clothing -->
   <section class="outdoor-garden">
-    <ProductsGridSection :series-id="1" />
+    <ProductsGridSection :series-id="3" />
+  </section>
+  <!-- clothing -->
+  <section class="outdoor-garden">
+    <ProductsGridSection :series-id="4" />
   </section>
   <!-- electronic -->
   <section class="outdoor-garden">
-    <ProductsGridSection :series-id="2" />
+    <ProductsGridSection :series-id="5" />
   </section>
   <!-- outdoor-garden -->
   <section class="outdoor-garden">
-    <ProductsGridSection :series-id="3" />
+    <ProductsGridSection :series-id="6" />
+  </section>
+  <!-- outdoor-garden -->
+  <section class="outdoor-garden">
+    <ProductsGridSection :series-id="7" />
+  </section>
+  <!-- outdoor-garden -->
+  <section class="outdoor-garden">
+    <ProductsGridSection :series-id="8" />
+  </section>
+  <!-- outdoor-garden -->
+  <section class="outdoor-garden">
+    <ProductsGridSection :series-id="9" />
+  </section>
+  <!-- outdoor-garden -->
+  <section class="outdoor-garden">
+    <ProductsGridSection :series-id="10" />
   </section>
 </template>
 

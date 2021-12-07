@@ -43,11 +43,18 @@ export default {
     const [bannerList, seriesList] = payload;
     state.bannerList = bannerList;
     state.seriesList = seriesList;
-    // 封装数组1
-    // state.slideList = seriesList[1].reduce((pre, cur, index) => {
-    //   // let target = 5;
 
-    // }, []);
+    // 封装数组1
+    console.log(
+      "seriesList[1].productList.slice(0, 5)=>",
+      seriesList[1].productList.slice(0, 5)
+    );
+
+    const slideTotalList = seriesList[1].productList;
+    seriesList[1].productList = [
+      slideTotalList.slice(0, 3),
+      slideTotalList.slice(3, 5),
+    ];
     // 封装数组2
     state.categoriesList = seriesList.reduce((pre, cur, index) => {
       const lastIndex = seriesList.length - 1 - index;
