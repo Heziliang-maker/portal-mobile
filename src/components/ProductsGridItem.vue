@@ -214,6 +214,7 @@ $padding: 8px;
         position: relative;
         display: flex;
         justify-content: center;
+        border-radius: $radius;
         .item-pic-col {
             position: absolute;
             right: 15%;

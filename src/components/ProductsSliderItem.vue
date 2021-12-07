@@ -237,7 +237,6 @@ $type3-pic-padding: 6px;
         width: 100%;
         background-color: $container-bg-2;
         overflow: hidden;
-        // margin-bottom: 7px;
         padding: $type2-pic-padding;
         box-sizing: border-box;
         border-radius: $radius;
