@@ -64,9 +64,11 @@
         class="searchbox"
       >
         <van-search
+          ref="searchInputRef"
           v-model="searchValue"
           placeholder="Search"
           @search="onSearch"
+          @blur="onBlur"
         />
       </div>
     </transition>
@@ -77,7 +79,7 @@
 
 
 <script>
-import { computed, reactive, toRefs } from "vue";
+import { computed, reactive, toRefs, ref, nextTick } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { TOGGLE_MENU_VISIBILITY_M } from "@/store/base/mutations";
@@ -93,14 +95,22 @@ export default {
             isSearchActive: false
         });
 
+        const searchInputRef = ref(null);
+
         const handleClickMenuIcon = () => {
             store.commit(TOGGLE_MENU_VISIBILITY_M, true);
         };
         const handleClickLogoIcon = () => {
             router.push("/home");
         };
-        const handleClickSearchIcon = () => {
-            state.isSearchActive = !state.isSearchActive;
+        const handleClickSearchIcon = async () => {
+            if (state.isSearchActive) {
+                state.isSearchActive = false;
+            } else {
+                state.isSearchActive = true;
+                await nextTick();
+                searchInputRef.value.focus();
+            }
         };
         // 返回
         const handleClickBackIcon = () => router.back();
@@ -109,6 +119,10 @@ export default {
         const onSearch = (val) => {
             console.log("=>", "onSearch", val);
             alert(val);
+        };
+
+        const onBlur = () => {
+            state.isSearchActive = false;
         };
 
         return {
@@ -126,6 +140,8 @@ export default {
             handleClickColIcon,
             handleClickUserIcon,
             onSearch,
+            onBlur,
+            searchInputRef,
             ...toRefs(state)
         };
     }
