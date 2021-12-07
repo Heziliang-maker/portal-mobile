@@ -48,6 +48,8 @@ $radius: var(--main-border-radius);
 
 // 按钮颜色
 $button-color: var(--main-button-color);
+// loading颜色
+$loading-color: var(--main-theme-color);
 // 页脚底色
 $footer-bg: var(--main-footer-bg);
 // grid布局
@@ -70,4 +72,5 @@ $icon-color-1: var(--main-icon-color-1);
 :export {
   buttonMainColor: $button-color;
   iconColorGray: $icon-color-1;
+  loadingColor: $loading-color;
 }

@@ -60,6 +60,7 @@ export default {
         };
 
         onBeforeUnmount(() => {
+            console.log("onBeforeUnmount=>", state.bs);
             state.bs.destroy();
         });
 
@@ -70,10 +71,14 @@ export default {
                 const wrapper = wrapperRef.value;
                 state.bs = new BScroll(wrapper, {
                     scrollX: true,
-                    probeType: 3,
+                    // probeType: 3,
                     bounce: true,
                     eventPassthrough: "vertical"
                 });
+                console.log("state.bs=>", state.bs, props.scrollList);
+            },
+            {
+                immediate: true
             }
         );
 

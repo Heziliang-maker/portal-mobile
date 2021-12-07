@@ -25,6 +25,8 @@ import installVant from "./config/vant";
 import installDirectives from "./directives";
 // =>引入 过滤器
 import filters from "./filters";
+// =>引入 loading
+import loading from "@/utils/loading";
 // =>引入 全局组件 注册函数
 import installGlobalComponents from "./components/global";
 // =>引入window函数
@@ -45,5 +47,6 @@ installGlobalComponents(app);
 // 注册全局属性
 // 1.挂载过滤器
 app.config.globalProperties.$filter = filters;
+app.config.globalProperties.$loading = loading;
 
 app.use(store).use(router).mount("#app");

@@ -3,7 +3,16 @@
  * @Description: ProductsSliderItem
 -->
 <template>
-  <div class="slider-item">
+  <div
+    class="slider-item"
+    :class="itemClass"
+    v-jumpTo="{url:dataSource.productUrl,type:2,id:dataSource.id,shopId:dataSource.shopId,
+        detailQuery:{
+          productId:dataSource.productId,
+          shopId:dataSource.shopId
+        }
+        }"
+  >
     <!-- 左侧 -->
     <section class="left">
       <div
@@ -70,8 +79,6 @@
         </transition>
         <van-image
           class="van-img"
-          :width="158"
-          :height="158"
           :src="dataSource.productImg"
           fit="cover"
           lazy-load
@@ -152,7 +159,7 @@ export default {
             required: true
         }
     },
-    setup(props, { emit }) {
+    setup(props, context) {
         const store = useStore();
 
         const videoPlayerRef = ref(null);
@@ -161,16 +168,9 @@ export default {
             love: true
         });
 
-        // const seriesId = inject("seriesId");
         const update = inject("update");
 
-        // const update = (productUrl) => {
-        //     store.commit(UPDATE_LIST_ISVIEW_M, { seriesId, productUrl });
-        // };
-
         const handleClickVideoPlayIcon = async (index, productUrl) => {
-            console.log("=>", "emit a event");
-            // emit("update", productUrl);
             update(productUrl);
 
             await nextTick();
@@ -180,7 +180,6 @@ export default {
             videoPlayer.play();
 
             videoPlayer.onended = () => {
-                // emit("update", productUrl);
                 update(productUrl);
             };
         };
@@ -195,6 +194,7 @@ export default {
                     styleVar: { "--before-background-color": ["#FC5443", "#FC9643"][props.selfIndex - 1] }
                 };
             }),
+            itemClass: computed(() => ({ type3: +props.groupIndex % 2 == 0 })),
             handleClickVideoPlayIcon,
             ...toRefs(state)
         };
@@ -203,13 +203,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$type2-img-width: 160px;
+$type2-img-height: 160px;
+$type3-img-width: 104px;
+$type3-img-height: 104px;
+$type2-section-left-width: 180px;
+$type3-section-left-width: 116px;
+$type2-pic-padding: 10px;
+$type3-pic-padding: 6px;
+
 .slider-item ::v-deep {
     display: flex;
     justify-content: flex-start;
     align-items: stretch;
 
     section.left {
-        width: 180px;
+        width: $type2-section-left-width;
         margin-right: 8px;
     }
     section.right {
@@ -238,8 +247,8 @@ export default {
         width: 100%;
         background-color: $container-bg-2;
         overflow: hidden;
-        margin-bottom: 7px;
-        padding: 8px;
+        // margin-bottom: 7px;
+        padding: $type2-pic-padding;
         box-sizing: border-box;
         border-radius: $radius;
         display: flex;
@@ -262,6 +271,8 @@ export default {
         }
 
         .van-img {
+            width: $type2-img-width;
+            height: $type2-img-height;
             border-radius: $radius;
             background-color: $container-bg-0;
         }
@@ -353,6 +364,24 @@ export default {
             @include font-n(10px, #999999);
             margin-bottom: 2px;
         }
+    }
+}
+.type3 ::v-deep {
+    section.left {
+        width: $type3-section-left-width;
+        margin-right: 8px;
+    }
+    .item-pic {
+        padding: $type3-pic-padding;
+    }
+    .van-img {
+        width: $type3-img-width !important;
+        height: $type3-img-height !important;
+    }
+
+    .van-img > img {
+        width: 100%;
+        height: 100%;
     }
 }
 </style>

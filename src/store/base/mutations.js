@@ -9,6 +9,8 @@ export const QUERY_PORTAL_SERIES_M = "QUERY_PORTAL_SERIES_M";
 
 export const TOGGLE_MENU_VISIBILITY_M = "TOGGLE_MENU_VISIBILITY_M";
 export const UPDATE_LIST_ISVIEW_M = "UPDATE_LIST_ISVIEW_M";
+export const TOGGLE_GLOBAL_LOADING = "TOGGLE_GLOBAL_LOADING";
+export const SET_SEARCHVALUE = "SET_SEARCHVALUE";
 
 export default {
   [TOGGLE_FOOTER_VISIBILITY_M](state, payload) {
@@ -41,8 +43,20 @@ export default {
     const [bannerList, seriesList] = payload;
     state.bannerList = bannerList;
     state.seriesList = seriesList;
+    state.categoriesList = seriesList.reduce((pre, cur, index) => {
+      // 封装数组
+      const lastIndex = seriesList.length - 1 - index;
+
+      return index > lastIndex ? pre : [...pre, [cur, seriesList[lastIndex]]];
+    }, []);
   },
   [QUERY_PORTAL_SERIES_M](state, payload) {
     state.seriesIndexList = payload;
+  },
+  [TOGGLE_GLOBAL_LOADING](state, payload) {
+    state.isGlobalLoading = payload;
+  },
+  [SET_SEARCHVALUE](state, payload) {
+    state.searchValue = payload;
   },
 };

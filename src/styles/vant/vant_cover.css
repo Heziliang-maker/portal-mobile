@@ -5,7 +5,7 @@
 
 :root {
   /* 容器类 */
-  --main-theme-color: #162d75;
+  --main-theme-color: #ff8030;
 
   --main-container-padding: 16px;
   --main-container-bg-0: #ffffff;
@@ -27,7 +27,7 @@
   --main-grid-padding-h: 8px;
   --main-grid-padding-v: 4px;
   /* 按钮类 */
-  --main-button-color: #ff8030;
+  --main-button-color: var(--main-theme-color);
 
   /* icon类 */
   --main-icon-color-1: #999999;
@@ -61,4 +61,5 @@
   --van-button-primary-background-color: var(--main-button-color);
   --van-button-primary-border-color: var(--main-button-color);
   --van-dropdown-item-z-index: var(--main-dropdown-index);
+  --van-dropdown-menu-title-text-color: var(--main-word-color-4);
 }

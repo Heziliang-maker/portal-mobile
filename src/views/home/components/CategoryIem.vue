@@ -9,17 +9,18 @@
   >
     <div class="category-pic">
       <img
-        :src="require(`@/assets/images/page-home/cate-${groupIndex * 2 + selfIndex}.png`)"
+        :src="dataSource.classifyImg"
         alt=""
       >
     </div>
     <div class="category-name">
-      {{dataSource.name}}
+      {{dataSource.classifyName}}
     </div>
   </div>
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 export default {
     name: "CategoryIem",
     props: {
@@ -36,9 +37,18 @@ export default {
             required: true
         }
     },
-    setup() {
+    setup(props) {
+        const router = useRouter();
+
         const handleClickCategory = () => {
-            console.log("点击分类=>", "..");
+            // router push
+            router.push({
+                path: "/series",
+                query: {
+                    seriesId: props.dataSource.classifyId,
+                    name: props.dataSource.classifyName
+                }
+            });
         };
 
         return {

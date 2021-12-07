@@ -15,9 +15,15 @@
         title-class="filter"
       >
         <template #title>
-          <div @click.stop="handleClickFilter">
+          <div
+            class="filter-label"
+            @click.stop="handleClickFilter"
+          >
             Filter
-            <van-icon name="chat-o" />
+            <svg-icon
+              class="svgicon"
+              icon-class="page-series-sort"
+            ></svg-icon>
           </div>
         </template>
       </van-dropdown-item>
@@ -47,8 +53,6 @@ export default {
             filter: { min: "", max: "" }
         });
 
-        const value = ref(0);
-
         const options = [
             { text: "Price Low To High", value: false },
             { text: "Price High To Low", value: true }
@@ -64,25 +68,25 @@ export default {
         };
 
         // initsearch
-        const watchFunc = async () => {
-            const { seriesId } = route.query;
+        const watchFunc = async (newValue) => {
+            const [filter, asc, query] = newValue;
 
-            state.filter.classifyId = seriesId;
+            const { seriesId, name, search } = query;
 
             const body = {
-                filter: { ...state.filter, classifyId: seriesId },
-                asc: state.asc
+                filter: { ...state.filter, classifyId: seriesId, productName: search },
+                asc
             };
             console.log("请求参数=>", body);
 
             const { result } = await _product.querySeriesProducts(body);
 
-            context.emit("load", result.data);
+            context.emit("load", { data: result.data, name });
 
-            console.log("res=>", result.data);
+            // console.log("res=>", result.data);
         };
 
-        watch(() => [state.filter, state.asc], watchFunc, { immediate: true });
+        watch(() => [state.filter, state.asc, route.query], watchFunc, { immediate: true });
 
         return {
             options,
@@ -99,6 +103,35 @@ export default {
 .actionsheet ::v-deep {
     .van-popup {
         height: auto;
+    }
+    .van-dropdown-menu__title:nth-of-type(1) {
+        font-size: 14px;
+        font-family: SourceHanSansSC-Normal, SourceHanSansSC;
+        font-weight: 400;
+        line-height: 20px;
+    }
+    .van-dropdown-menu__item:nth-of-type(2) {
+        height: 100%;
+        width: 100%;
+        @include font-n(14px, $word-color-4);
+        .van-dropdown-menu__title.filter {
+            height: 100%;
+            width: 100%;
+            div {
+                height: 100%;
+                width: 100%;
+            }
+            .filter-label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .svgicon {
+                width: 16px;
+                height: 16px;
+            }
+        }
     }
     .van-dropdown-menu__title.filter::after {
         display: none;

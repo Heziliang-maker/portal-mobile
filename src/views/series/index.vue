@@ -10,12 +10,8 @@
       <ActionSheet @load="onLoad" />
     </div>
 
-    <div
-      class="series-loading"
-      v-if="isLoading"
-    >
-      <van-loading />
-    </div>
+    <Loading v-if="isLoading" />
+
     <!-- gutter -->
     <div class="gutter"></div>
     <!-- main -->
@@ -49,16 +45,16 @@ import MainContainer from "@/components/MainContainer";
 import ProductsGrid from "@/components/ProductsGrid.vue";
 import ProductsGridItem from "@/components/ProductsGridItem.vue";
 import ActionSheet from "./components/ActionSheet.vue";
+import Loading from "@/components/Loading";
 export default {
     name: "Series",
-    components: { BetterScrollView, MainContainer, ProductsGrid, ProductsGridItem, ActionSheet },
+    components: { BetterScrollView, MainContainer, ProductsGrid, ProductsGridItem, ActionSheet, Loading },
     setup(props, context) {
         const route = useRoute();
         const router = useRouter();
         const store = useStore();
 
         const state = reactive({
-            seriesId: "",
             name: "",
             productList: [],
             isLoading: true
@@ -66,26 +62,25 @@ export default {
 
         state.isLoading = true;
 
-        console.log("route=>", route);
+        const { seriesId } = route.query;
 
-        const onLoad = (data) => {
+        watch(route.query, () => {
+            console.log("=>", "... changed");
+        });
+
+        provide("seriesId", seriesId);
+
+        const onLoad = ({ data, name }) => {
             state.productList = data;
+            state.name = name;
             state.isLoading = false;
         };
 
         provide("seriesId", state.seriesId);
 
-        watch(route, (newValue, oldValue) => {});
-
         return {
             ...toRefs(state),
-            series: computed(
-                () =>
-                    store.state.seriesList.find((series) => series.classifyId === state.seriesId) || {
-                        classifyName: "",
-                        classifyList: []
-                    }
-            ),
+
             onLoad
         };
     }
@@ -93,10 +88,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.series-loading {
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 </style>

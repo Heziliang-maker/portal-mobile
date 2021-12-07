@@ -12,6 +12,8 @@ import { TOGGLE_FOOTER_VISIBILITY_M } from "./store/base/mutations";
 import { QUERY_PORTAL_A, QUERY_PORTAL_SERIES_A } from "./store/base/actions";
 // =>引入获取页面标题函数
 import { getPageTitle } from "@/utils/tools";
+// =>
+import { scrollTo } from "@/utils/scroll-to";
 
 router.beforeEach(async (to, from) => {
   // set page title
@@ -29,6 +31,8 @@ router.beforeEach(async (to, from) => {
     //
     await store.dispatch(QUERY_PORTAL_SERIES_A);
   }
+
+  scrollTo(0, 800);
 
   // next((vm) => {
   //   console.log("=>", "nextTick");

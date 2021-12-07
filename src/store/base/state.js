@@ -12,4 +12,8 @@ export default {
   bannerList: [],
   seriesList: [],
   seriesIndexList: [],
+  categoriesList: [],
+  isGlobalLoading: false,
+  // 搜索框内容
+  searchValue: "",
 };

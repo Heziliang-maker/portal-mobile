@@ -32,12 +32,10 @@ export function querySeriesProducts({ asc, filter }) {
       query: {
         filter: {
           isOnMarket: true,
-          // maxPrice: 0,
-          // minPrice: 0,
-          // productName: 231321,
-
-          // classifyId: 123,
-          ...filter,
+          maxPrice: filter.max,
+          minPrice: filter.min,
+          productName: filter.productName,
+          classifyId: filter.classifyId,
         },
         order: true,
         orderBy: {
@@ -66,6 +64,17 @@ export function queryProductsDetail({ productId, shopId }) {
       query: {
         productId,
       },
+    },
+  });
+}
+// 查询某个产品的详情
+export function queryProductsShop({ shopId }) {
+  return request({
+    url: baseURL.shop + "/shops/query/info",
+    method: "post",
+    headers: {
+      shopid: shopId,
+      "user-key": "3c406742-e6d2-4d76-abe0-5e43b499f7f9",
     },
   });
 }

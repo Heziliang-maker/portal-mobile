@@ -6,15 +6,18 @@
   <div class="detail">
     <!-- Product Display -->
     <section class="product-display">
-      <ProductDisplay :data-source="data" />
+      <ProductDisplay
+        :shop-info="shop"
+        :data-source="data"
+      />
     </section>
     <!-- Product Related -->
-    <section class="product-related">
+    <!-- <section class="product-related">
       <ProductsGridSection
         :showFooter="false"
         :series-id="1"
       />
-    </section>
+    </section> -->
     <!--   Product Submitbtn -->
     <section class="product-submitbtn">
       <div
@@ -46,7 +49,7 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, onMounted, nextTick, getCurrentInstance } from "vue";
 import { useRoute } from "vue-router";
 import { _product } from "@/api";
 
@@ -57,20 +60,31 @@ export default {
     components: { ProductDisplay, ProductsGridSection },
     setup() {
         const route = useRoute();
-
+        const { appContext } = getCurrentInstance();
         const state = reactive({
             data: {},
-            love: false
+            love: false,
+            shop: {}
         });
+
+        appContext.config.globalProperties.$loading.show();
 
         const init = async () => {
             const { query } = route;
             const body = JSON.parse(query.requestQuery);
-            const res = await _product.queryProductsDetail(body);
-            state.data = res.result.data;
+            const res1 = await _product.queryProductsDetail(body);
+            state.data = res1.result.data;
+            const res2 = await _product.queryProductsShop({ shopId: body.shopId });
+            state.shop = res2.result;
         };
 
         init();
+
+        onMounted(async () => {
+            await nextTick();
+            appContext.config.globalProperties.$loading.hide();
+            console.log("=>", "loaded");
+        });
 
         const handleClickColIcon = () => (state.love = !state.love);
 

@@ -21,9 +21,11 @@
   <section class="shop-categories">
     <CategoriesSection />
   </section>
+  <!-- gutter -->
+  <div class="gutter"></div>
   <!-- clothing -->
   <section class="outdoor-garden">
-    <ProductsGridSection :series-id="0" />
+    <ProductsGridSection :series-id="1" />
   </section>
   <!-- electronic -->
   <section class="outdoor-garden">
@@ -37,23 +39,35 @@
 
 
 <script>
-import { reactive, provide, computed, toRefs } from "vue";
+import { reactive, provide, computed, toRefs, onMounted, nextTick, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import { _product } from "@/api";
 import BannerSwiper from "./components/BannerSwiper";
 import ProductsGridSection from "./components/ProductsGridSection.vue";
 import ProductsSliderSection from "./components/ProductsSliderSection.vue";
 import CategoriesSection from "./components/CategoriesSection.vue";
-
 import { QUERY_PORTAL_A } from "@/store/base/actions";
 export default {
     name: "Home",
     components: { BannerSwiper, ProductsGridSection, ProductsSliderSection, CategoriesSection },
     setup() {
         const state = reactive({
-            seriesList: []
+            seriesList: [],
+            isLoading: false
         });
-        
+
+        state.isLoading = true;
+
+        const { appContext } = getCurrentInstance();
+
+        appContext.config.globalProperties.$loading.show();
+
+        onMounted(async () => {
+            // 等待子组件
+            await nextTick();
+            console.log("=>", "... mounted");
+            appContext.config.globalProperties.$loading.hide();
+        });
 
         // const store = useStore();
 

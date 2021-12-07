@@ -81,10 +81,8 @@
     </div>
     <div class="item-price notranslate">
       <div class="current">
-        <p
-          class="current-price"
-          v-html="$filter.priceGroup(dataSource.retailPrice)"
-        ></p>
+        <p class="current-price">
+          {{dataSource.retailPrice}}</p>
         <p
           class="local-price"
           v-if="rate&&rate!=1&&ccy!=='$'"

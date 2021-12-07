@@ -5,10 +5,7 @@
 <template>
   <div class="product">
     <!-- 商品大图 -->
-    <div
-      class="product-main"
-      v-if="images && images.length > 0"
-    >
+    <div class="product-main">
       <div
         class="product-main-icon"
         v-if="!!dataSource.video && !isView"
@@ -60,7 +57,7 @@
           @change="onSwiperChange"
         >
           <van-swipe-item
-            v-for="item in images"
+            v-for="item in mainImages"
             :key="item.url"
           >
             <van-image
@@ -78,7 +75,7 @@
         ref="wrapperRef"
       >
         <div class="group-img">
-          <template v-for="(item, index) in images">
+          <template v-for="(item, index) in dataSource.pics">
             <div
               class="img-box"
               :class="{ 'img-box-check': curMainImageIndex == index }"
@@ -122,25 +119,35 @@
       </div>
     </div>
     <!-- gutter -->
-    <div class="gutter"></div>
+    <div
+      class="gutter"
+      v-if="isColorExis"
+    ></div>
     <!-- sku -->
-    <div class="product-sku">
+    <div
+      class="product-sku"
+      v-if="isColorExis"
+    >
       <div class="product-sku__title">Color</div>
       <div class="product-sku__wrapper">
         <BetterScrollView
-          :scroll-list='scrollList'
+          :scroll-list='color'
           targetClass="box"
           columnKey="url"
         >
-          <template #item="{item}">
-            <div class="product-sku__item">
-              <van-image
+          <template #item="{item:colorItem}">
+            <div
+              class="product-sku__item"
+              @click="handleClickColor(colorItem)"
+            >
+              <!-- <van-image
                 width="100%"
                 height="100%"
                 fit="cover"
                 lazy-load
                 :src="item.url"
-              />
+              /> -->
+              {{colorItem}}
             </div>
           </template>
         </BetterScrollView>
@@ -150,10 +157,15 @@
     <div class="gutter"></div>
     <!-- brand info -->
     <div class="product-brand">
-      <div class="product-brand__logo"></div>
+      <div class="product-brand__logo">
+        <img
+          :src="shopInfo.logoUrl"
+          :alt="shopInfo.name"
+        >
+      </div>
       <div class="product-brand__info">
-        <div class="name van-ellipsis">NIKE</div>
-        <div class="website van-ellipsis">https://www.nike.com</div>
+        <div class="name van-ellipsis">{{shopInfo.name}}</div>
+        <div class="website van-ellipsis">{{shopInfo.domain}}</div>
       </div>
       <div class="product-brand__official">Brand Official Website</div>
     </div>
@@ -177,14 +189,18 @@ export default {
         dataSource: {
             type: Object,
             required: true
+        },
+        shopInfo: {
+            type: Object,
+            required: true
         }
     },
     setup(props, context) {
         const state = reactive({
             curMainImageIndex: 0,
-            bs: null,
             isView: false,
-            scrollList: []
+            bs: null,
+            mainImages: []
         });
 
         const wrapperRef = ref(null);
@@ -195,26 +211,22 @@ export default {
             state.curMainImageIndex = index;
         };
 
+        // const images = computed(() => props.dataSource.pics);
+
         const changeImage = (index) => {
             if (state.isView) {
                 videoPlayer.value.pause();
                 state.isView = false;
             }
+
+            // console.log("images.value=>", images.value);
+
+            state.mainImages = props.dataSource.pics;
+
             state.curMainImageIndex = index;
 
             swiperRef.value.swipeTo(index);
         };
-
-        setTimeout(() => {
-            state.scrollList = [
-                { url: "https://img.yzcdn.cn/vant/cat.jpeg" },
-                { url: "https://img.yzcdn.cn/vant/cat.jpeg" },
-                { url: "https://img.yzcdn.cn/vant/cat.jpeg" },
-                { url: "https://img.yzcdn.cn/vant/cat.jpeg" },
-                { url: "https://img.yzcdn.cn/vant/cat.jpeg" },
-                { url: "https://img.yzcdn.cn/vant/cat.jpeg" }
-            ];
-        }, 600);
 
         const handleClickVideoPlayIcon = async () => {
             state.isView = true;
@@ -243,21 +255,51 @@ export default {
             }
         };
 
+        const getColorSkuImg = (color) => {
+            const sku = props.dataSource.sku.filter((skuItem) => skuItem.sp.color === color && skuItem.pic);
+            console.log("sku=>", sku);
+            if (sku.length > 0) {
+                return sku[0].pic;
+            }
+            return props.dataSource.pics[0].url;
+        };
+
+        const handleClickColor = (color) => {
+            const pic = getColorSkuImg(color);
+            state.mainImages = [{ url: pic }];
+        };
+
         onBeforeUnmount(() => {
             state.bs.destroy();
+        });
+
+        const isColorExis = computed(() => {
+            if (props.dataSource.attrs && props.dataSource.attrs.color) {
+                return props.dataSource.attrs.color.length > 0;
+            }
+            return false;
+        });
+        const color = computed(() => {
+            if (props.dataSource.attrs && props.dataSource.attrs.color) {
+                return props.dataSource.attrs.color;
+            }
+            return [];
         });
 
         watch(
             () => props.dataSource,
             async (newValue, oldValue) => {
+                console.log("=>", "watch..");
+                state.mainImages = props.dataSource.pics;
                 await nextTick();
                 state.bs = new BScroll(wrapperRef.value, {
                     scrollX: true,
-                    probeType: 3,
+                    // probeType: 3,
                     bounce: true,
                     eventPassthrough: "vertical"
                 });
-            }
+            },
+            { immediate: true }
         );
 
         return {
@@ -265,12 +307,14 @@ export default {
             videoRef,
             swiperRef,
             ...toRefs(state),
-            images: computed(() => props.dataSource.pics),
+            color,
+            isColorExis,
             onSwiperChange,
             changeImage,
             handleClickVideoPlayIcon,
             handleClickVideoCloseIcon,
-            handleClickVideo
+            handleClickVideo,
+            handleClickColor
         };
     }
 };
@@ -442,6 +486,10 @@ export default {
         $title-width: 45px;
         $gap: $container-padding;
 
+        .container-wrapper {
+            font-size: 0;
+        }
+
         .product-sku__title {
             width: $title-width;
             @include font-n();
@@ -453,11 +501,14 @@ export default {
         .product-sku__item {
             @include font-n();
             margin-right: $container-padding;
-            width: 32px;
-            height: 32px;
+            // width: 32px;
+            // height: 32px;
         }
         .box:first-of-type {
             margin-left: 0;
+        }
+        .box:last-of-type {
+            margin-right: 0;
         }
     }
     .product-brand {
@@ -481,6 +532,12 @@ export default {
             background: $container-bg-0;
             margin-right: $container-padding;
             border: 1px solid $border-color-4;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
         .product-brand__info {
             .name {

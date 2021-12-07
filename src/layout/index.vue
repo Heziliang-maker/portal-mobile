@@ -13,8 +13,13 @@
       </van-sticky>
     </div>
     <!-- main -->
+    <Loading v-if="loading" />
     <div class="container-main">
-      <router-view></router-view>
+      <router-view v-slot="{ Component }">
+        <keep-alive :include="keep">
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
     </div>
     <!-- footer -->
     <div class="container-footer notranslate">
@@ -27,15 +32,28 @@
   </div>
 </template>
 
-
 <script>
 import TheNav from "./components/TheNav";
 import TheFooter from "./components/TheFooter";
 import MenuPop from "@/components/MenuPop";
+import Loading from "@/components/Loading";
+import { ref, computed, useSlots } from "vue";
+import { useStore } from "vuex";
 export default {
     name: "Layout",
-    components: { TheNav, TheFooter, MenuPop },
-    setup() {}
+    components: { TheNav, TheFooter, MenuPop, Loading },
+    setup() {
+        const store = useStore();
+
+        const keep = ref(["Home"]);
+
+        const loading = computed(() => store.state.isGlobalLoading);
+
+        return {
+            loading,
+            keep
+        };
+    }
 };
 </script>
 <style lang="scss" scoped>

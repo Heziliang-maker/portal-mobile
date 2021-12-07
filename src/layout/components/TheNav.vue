@@ -82,10 +82,12 @@
 import { computed, reactive, toRefs, ref, nextTick } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-import { TOGGLE_MENU_VISIBILITY_M } from "@/store/base/mutations";
+import { TOGGLE_MENU_VISIBILITY_M, SET_SEARCHVALUE } from "@/store/base/mutations";
+
 export default {
     setup() {
         const route = useRoute();
+
         const router = useRouter();
 
         const store = useStore();
@@ -97,12 +99,15 @@ export default {
 
         const searchInputRef = ref(null);
 
+        // 菜单
         const handleClickMenuIcon = () => {
             store.commit(TOGGLE_MENU_VISIBILITY_M, true);
         };
+        // logo
         const handleClickLogoIcon = () => {
             router.push("/home");
         };
+        // 搜索
         const handleClickSearchIcon = async () => {
             if (state.isSearchActive) {
                 state.isSearchActive = false;
@@ -114,14 +119,27 @@ export default {
         };
         // 返回
         const handleClickBackIcon = () => router.back();
+        // 收藏
         const handleClickColIcon = () => {};
+        // 用户
         const handleClickUserIcon = () => {};
+        // 搜索 触发
         const onSearch = (val) => {
             console.log("=>", "onSearch", val);
-            alert(val);
-        };
+            // store.commit(SET_SEARCHVALUE, val);
 
+            const { query } = route;
+            router.push({
+                path: "/series",
+                query: {
+                    ...query,
+                    search: val
+                }
+            });
+        };
+        // 搜索 失焦
         const onBlur = () => {
+            onSearch(state.searchValue);
             state.isSearchActive = false;
         };
 
@@ -129,7 +147,6 @@ export default {
             isBackShow: computed(() => {
                 const whiteList = ["/detail"];
                 const path = route.path;
-                console.log("route changed=>", route);
                 return whiteList.includes(path);
             }),
             searchIconClass: computed(() => (state.isSearchActive ? "layout-nav-search-active" : "layout-nav-search")),

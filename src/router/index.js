@@ -6,6 +6,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from "@/layout";
 
+import Home from "@/views/home";
+
 const RouterView = {
   render: (h) => h("router-view"),
 };
@@ -19,7 +21,7 @@ const routes = [
       {
         name: "主页",
         path: "/home",
-        component: () => import("@/views/home"),
+        component: Home,
         meta: {
           title: "主页",
         },
@@ -68,13 +70,6 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0 };
-    }
-  },
 });
 
 export default router;

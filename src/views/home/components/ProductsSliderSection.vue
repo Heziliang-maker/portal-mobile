@@ -9,6 +9,7 @@
     </template>
     <template #content>
       <BetterScrollView
+        key="slider"
         class="scorllview"
         :scrollList="scrollList"
         targetClass="box"
@@ -16,14 +17,10 @@
       >
         <template #item="{item,index}">
           <ProductsSliderItem
+            v-for="(sitem,sindex) in item"
             :group-index="index"
-            :self-index="1"
-            :data-source="item[0]"
-          />
-          <ProductsSliderItem
-            :group-index="index"
-            :self-index="2"
-            :data-source="item[1]"
+            :self-index="sindex+1"
+            :data-source="sitem"
           />
         </template>
       </BetterScrollView>
@@ -64,6 +61,26 @@ export default {
                         starLevel: null,
                         video: null,
                         videoCover: null,
+                        isView: false
+                    },
+                    {
+                        ccy: "USD",
+                        classifyId: 6,
+                        classifyName: "Jewelry",
+                        id: 660,
+                        productId: "1092912414269",
+                        productImg:
+                            "https://buykop.oss-cn-shanghai.aliyuncs.com/images/2021-09-29/103/7ac837dca6ce494882327c0cb9a3053d.jpg",
+                        productName: "iPhone 13 Pro Max 128GB",
+                        productSort: 5,
+                        productUrl: "https://apple.qa.buykop.com/system/detail/1092912414269?buykopPortal=4",
+                        reamt: 0,
+                        retailPrice: 8999,
+                        shopId: "8yolLLaiogF3TcBZAdRy4w==",
+                        starLevel: 4.8,
+                        video: "https://buykop.oss-cn-shanghai.aliyuncs.com/video/2021-11-09/103/641ea3003e7f4194987186648ec2a40f.mp4",
+                        videoCover:
+                            "https://buykop.oss-cn-shanghai.aliyuncs.com/images/2021-11-09/103/3bb93e000b2f4eabb6ecc2d34b4c6cf0.jpg",
                         isView: false
                     },
                     {
@@ -153,8 +170,11 @@ export default {
     .box {
         // width: 200px;
         vertical-align: top;
-        & > div:first-of-type {
+        & > div {
             margin-bottom: $slider-padding-h;
+        }
+        & > div:last-of-type {
+            margin-bottom: 0;
         }
     }
 }
