@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { reactive, watch, toRefs, ref, onMounted, nextTick, onBeforeUnmount } from "vue";
+import { reactive, watch, toRefs, ref, onMounted, nextTick, onBeforeUnmount, isProxy } from "vue";
 import BScroll from "@better-scroll/core";
 export default {
     name: "BetterScrollView",
@@ -60,7 +60,8 @@ export default {
         };
 
         onBeforeUnmount(() => {
-            console.log("onBeforeUnmount=>", state.bs);
+            // onBefore
+            console.log("onBeforeUnmount=>", state.bs !== null);
             state.bs.destroy();
         });
 
@@ -75,7 +76,7 @@ export default {
                     bounce: true,
                     eventPassthrough: "vertical"
                 });
-                console.log("state.bs=>", state.bs, props.scrollList);
+                console.log(" start =>", state.bs !== null);
             },
             {
                 immediate: true

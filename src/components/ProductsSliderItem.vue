@@ -190,8 +190,8 @@ export default {
             rate: computed(() => store.state.rate),
             badgeStyle: computed(() => {
                 return {
-                    index: props.groupIndex * 2 + props.selfIndex,
-                    styleVar: { "--before-background-color": ["#FC5443", "#FC9643"][props.selfIndex - 1] }
+                    index: props.groupIndex * 3 + props.selfIndex,
+                    styleVar: { "--before-background-color": ["#FC5443", "#FC9643"][props.selfIndex % 2] }
                 };
             }),
             itemClass: computed(() => ({ type3: +props.groupIndex % 2 == 0 })),

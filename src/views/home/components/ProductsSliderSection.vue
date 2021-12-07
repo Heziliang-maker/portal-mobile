@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { provide, reactive, toRefs } from "vue";
+import { provide, reactive, toRefs,computed } from "vue";
 import MainContainer from "@/components/MainContainer";
 import BetterScrollView from "@/components/BetterScrollView";
 import ProductsSliderItem from "@/components/ProductsSliderItem";
@@ -157,6 +157,7 @@ export default {
         provide("update", updateGrid);
 
         return {
+            slideList: computed(() => store.state.slideList),
             ...toRefs(state)
         };
     }

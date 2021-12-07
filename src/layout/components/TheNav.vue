@@ -125,7 +125,7 @@ export default {
         const handleClickUserIcon = () => {};
         // 搜索 触发
         const onSearch = (val) => {
-            console.log("=>", "onSearch", val);
+            // console.log("=>", "onSearch", val);
             // store.commit(SET_SEARCHVALUE, val);
 
             const { query } = route;
@@ -139,7 +139,7 @@ export default {
         };
         // 搜索 失焦
         const onBlur = () => {
-            onSearch(state.searchValue);
+            // onSearch(state.searchValue);
             state.isSearchActive = false;
         };
 

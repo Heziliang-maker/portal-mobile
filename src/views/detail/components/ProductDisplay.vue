@@ -177,7 +177,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed, watch, nextTick, onBeforeUnmount } from "vue";
+import { ref, reactive, toRefs, computed, watch, nextTick } from "vue";
 import BScroll from "@better-scroll/core";
 import Score from "@/components/Score";
 import BetterScrollView from "@/components/BetterScrollView";
@@ -270,10 +270,6 @@ export default {
             state.selectedKey = "sku";
             state.curMainImageIndex = index;
         };
-
-        onBeforeUnmount(() => {
-            state.bs.destroy();
-        });
 
         const isColorExis = computed(() => {
             if (props.dataSource.attrs && props.dataSource.attrs.color) {

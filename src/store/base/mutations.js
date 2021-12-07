@@ -43,8 +43,13 @@ export default {
     const [bannerList, seriesList] = payload;
     state.bannerList = bannerList;
     state.seriesList = seriesList;
+    // 封装数组1
+    // state.slideList = seriesList[1].reduce((pre, cur, index) => {
+    //   // let target = 5;
+
+    // }, []);
+    // 封装数组2
     state.categoriesList = seriesList.reduce((pre, cur, index) => {
-      // 封装数组
       const lastIndex = seriesList.length - 1 - index;
 
       return index > lastIndex ? pre : [...pre, [cur, seriesList[lastIndex]]];

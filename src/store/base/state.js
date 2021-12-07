@@ -13,6 +13,7 @@ export default {
   seriesList: [],
   seriesIndexList: [],
   categoriesList: [],
+  slideList: [],
   isGlobalLoading: false,
   // 搜索框内容
   searchValue: "",
