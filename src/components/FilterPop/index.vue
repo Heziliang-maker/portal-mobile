@@ -5,6 +5,7 @@
 <template>
   <!-- popup -->
   <van-popup
+    class="filter"
     v-model:show="isFilterShow"
     close-on-popstate
     close-on-click-overlay

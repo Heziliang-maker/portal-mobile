@@ -9,11 +9,11 @@
   >
     <div class="item-pic">
       <!-- 视频播放按钮 -->
-      <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
+      <!-- <iframe  src="@/assets/global-bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
       <img
         v-show="!!dataSource.video && !dataSource.isView"
         class="item-pic-play"
-        src="@/assets/images/global/bofang.png"
+        src="@/assets/images/global/global-bofang.png"
         alt="播放该视频"
         @click.stop="handleClickVideoPlayIcon(index,dataSource.productUrl)"
       >
@@ -21,14 +21,14 @@
         <transition name="van-fade">
           <img
             v-show="love"
-            src="@/assets/images/global/col-active.png"
+            src="@/assets/images/global/global-col-active.png"
             alt="心愿单"
           >
         </transition>
         <transition name="van-fade">
           <img
             v-show="!love"
-            src="@/assets/images/global/col-inactive.png"
+            src="@/assets/images/global/global-col-inactive.png"
             alt="心愿单"
           >
         </transition>
@@ -166,8 +166,8 @@ export default {
 
         return {
             videoPlayerRef,
-            ccy: computed(() => store.state.ccy),
-            rate: computed(() => store.state.rate),
+            ccy: computed(() => store.getters.ccy),
+            rate: computed(() => store.getters.rate),
             handleClickVideoPlayIcon,
             ...toRefs(state)
         };

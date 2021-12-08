@@ -7,8 +7,8 @@ export default {
   isFooterVisible: false,
   isMenuShow: false,
   isFilterShow: false,
-  ccy: "$",
-  rate: 1.2,
+  isActivityShow: false,
+
   bannerList: [],
   seriesList: [],
   seriesIndexList: [],

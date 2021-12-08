@@ -39,7 +39,7 @@
     <div class="logo">
       <img
         @click="handleClickLogoIcon"
-        src="@/assets/images/layout-nav/header-logo.webp"
+        src="@/assets/images/layout-nav/layout-nav-logo.webp"
         alt="buykop-logo"
       >
     </div>
@@ -145,7 +145,7 @@ export default {
 
         return {
             isBackShow: computed(() => {
-                const whiteList = ["/detail"];
+                const whiteList = ["/detail", "/terms", "/privacy", "/about"];
                 const path = route.path;
                 return whiteList.includes(path);
             }),

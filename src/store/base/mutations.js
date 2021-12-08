@@ -11,11 +11,15 @@ export const TOGGLE_MENU_VISIBILITY_M = "TOGGLE_MENU_VISIBILITY_M";
 export const UPDATE_LIST_ISVIEW_M = "UPDATE_LIST_ISVIEW_M";
 export const TOGGLE_GLOBAL_LOADING = "TOGGLE_GLOBAL_LOADING";
 export const SET_SEARCHVALUE = "SET_SEARCHVALUE";
+export const TOGGLE_ACTIVITY_VISIBILITY_M = "TOGGLE_ACTIVITY_VISIBILITY_M";
 
 export default {
   [TOGGLE_FOOTER_VISIBILITY_M](state, payload) {
     // console.log("=>", "TOGGLE_FOOTER_VISIBILITY", payload);
     state.isFooterVisible = payload;
+  },
+  [TOGGLE_ACTIVITY_VISIBILITY_M](state, payload) {
+    state.isActivityShow = payload;
   },
   [TOGGLE_FILTER_VISIBILITY_M](state, payload) {
     // console.log("=>", "TOGGLE_FOOTER_VISIBILITY", payload);
@@ -68,6 +72,7 @@ export default {
   [TOGGLE_GLOBAL_LOADING](state, payload) {
     state.isGlobalLoading = payload;
   },
+
   [SET_SEARCHVALUE](state, payload) {
     state.searchValue = payload;
   },

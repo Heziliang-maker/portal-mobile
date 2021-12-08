@@ -21,6 +21,7 @@
   --main-border-color-2: #dfdacd;
   --main-border-color-3: #e3e3e3;
   --main-border-color-4: #e9e8e8;
+  --main-border-color-4: #d8d8d8;
   --main-border-radius: 4px;
 
   /* 宫格类 */
@@ -42,6 +43,7 @@
   --main-word-color-3: #999999;
   --main-word-color-4: #333333;
   --main-word-color-5: #1d1d1d;
+  --main-word-color-6: #000000;
 
   /* zindex */
   --main-sticky-index: 100;

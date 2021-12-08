@@ -21,11 +21,11 @@
         :style="badgeStyle.styleVar"
       >
         <!-- 视频播放按钮 -->
-        <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
+        <!-- <iframe  src="@/assets/global-bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
         <img
           v-show="!!dataSource.video && !dataSource.isView"
           class="item-pic-play"
-          src="@/assets/images/global/bofang.png"
+          src="@/assets/images/global/global-bofang.png"
           alt="播放该视频"
           @click.stop="handleClickVideoPlayIcon(index,dataSource.productUrl)"
         >
@@ -33,14 +33,14 @@
           <transition name="van-fade">
             <img
               v-show="love"
-              src="@/assets/images/global/col-active.png"
+              src="@/assets/images/global/global-col-active.png"
               alt="心愿单"
             >
           </transition>
           <transition name="van-fade">
             <img
               v-show="!love"
-              src="@/assets/images/global/col-inactive.png"
+              src="@/assets/images/global/global-col-inactive.png"
               alt="心愿单"
             >
           </transition>
@@ -139,7 +139,6 @@ import { UPDATE_LIST_ISVIEW_M } from "@/store/base/mutations";
 export default {
     name: "ProductsSliderItem",
     components: { Score },
-    // inject: ["seriesId"],
     props: {
         dataSource: {
             type: Object,
@@ -161,9 +160,12 @@ export default {
             love: true
         });
 
+        const seriesId = inject("seriesId");
+
         const update = (productUrl) => {
             store.commit(UPDATE_LIST_ISVIEW_M, { seriesId, productUrl });
         };
+
         const handleClickVideoPlayIcon = async (index, productUrl) => {
             update(productUrl);
 

@@ -5,7 +5,7 @@
 <template>
   <!-- popup -->
   <van-popup
-    overlay-class='menu'
+    class="menu"
     v-model:show="isMenuShow"
     close-on-popstate
     close-on-click-overlay
