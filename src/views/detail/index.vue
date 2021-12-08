@@ -27,13 +27,13 @@
 
         <img
           v-show="love"
-          src="@/assets/images/global/col-active.png"
+          src="@/assets/images/global/global-col-active.png"
           alt="心愿单"
         >
 
         <img
           v-show="!love"
-          src="@/assets/images/global/col-inactive.png"
+          src="@/assets/images/global/global-col-inactive.png"
           alt="心愿单"
         >
 

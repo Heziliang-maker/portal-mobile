@@ -10,7 +10,7 @@
       <div class="footer-info-item">
         <div class="item-pic">
           <img
-            src="@/assets/images/layout-footer/info-1.png"
+            src="@/assets/images/layout-footer/layout-footer-info-1.png"
             alt=""
           >
         </div>
@@ -23,7 +23,7 @@
       <div class="footer-info-item">
         <div class="item-pic">
           <img
-            src="@/assets/images/layout-footer/info-2.png"
+            src="@/assets/images/layout-footer/layout-footer-info-2.png"
             alt=""
           >
         </div>
@@ -36,7 +36,7 @@
       <div class="footer-info-item">
         <div class="item-pic">
           <img
-            src="@/assets/images/layout-footer/info-3.png"
+            src="@/assets/images/layout-footer/layout-footer-info-3.png"
             alt=""
           >
         </div>
@@ -50,7 +50,7 @@
       <div class="footer-info-item">
         <div class="item-pic">
           <img
-            src="@/assets/images/layout-footer/info-4.png"
+            src="@/assets/images/layout-footer/layout-footer-info-4.png"
             alt=""
           >
         </div>
@@ -63,7 +63,7 @@
       <div class="footer-info-item">
         <div class="item-pic">
           <img
-            src="@/assets/images/layout-footer/info-5.png"
+            src="@/assets/images/layout-footer/layout-footer-info-5.png"
             alt=""
           >
         </div>
@@ -99,23 +99,23 @@
       <div class="title">Payment Options</div>
       <div class="content">
         <img
-          src="@/assets/images/layout-footer/pay-1.png"
+          src="@/assets/images/layout-footer/layout-footer-pay-1.png"
           alt="visa-pay"
         >
         <img
-          src="@/assets/images/layout-footer/pay-2.png"
+          src="@/assets/images/layout-footer/layout-footer-pay-2.png"
           alt="payc-pay"
         >
         <!-- <img
-          src="@/assets/images/layout-footer/pay-3.png"
+          src="@/assets/images/layout-footer/layout-footer-pay-3.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/layout-footer/pay-4.png"
+          src="@/assets/images/layout-footer/layout-footer-pay-4.png"
           alt="visa支付"
         >
         <img
-          src="@/assets/images/layout-footer/pay-5.png"
+          src="@/assets/images/layout-footer/layout-footer-pay-5.png"
           alt="visa支付"
         >
         <img

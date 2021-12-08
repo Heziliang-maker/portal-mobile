@@ -39,7 +39,7 @@
     <div class="logo">
       <img
         @click="handleClickLogoIcon"
-        src="@/assets/images/layout-nav/header-logo.webp"
+        src="@/assets/images/layout-nav/layout-nav-logo.webp"
         alt="buykop-logo"
       >
     </div>

@@ -23,7 +23,7 @@
           </div>
           <div class="main1-img">
             <img
-              src="@/assets/images/global/gift.webp"
+              src="@/assets/images/global/global-activity-cake.webp"
               alt=""
             >
           </div>
@@ -66,7 +66,7 @@
                 <li class="list-item">
                   <div class="list-item-main">
                     <img
-                      src="@/assets/images/global/gift1.webp"
+                      src="@/assets/images/global/global-activity-gift1.webp"
                       alt=""
                     >
                   </div>
@@ -75,7 +75,7 @@
                 <li class="list-item">
                   <div class="list-item-main">
                     <img
-                      src="@/assets/images/global/gift2.webp"
+                      src="@/assets/images/global/global-activity-gift2.webp"
                       alt=""
                     >
                   </div>

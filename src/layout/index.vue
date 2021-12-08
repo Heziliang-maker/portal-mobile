@@ -34,13 +34,13 @@
     </div>
     <transition name="van-slide-right">
       <div
-        v-show="isDiscountShow"
-        class="discountbtn"
-        @click="handleClickDiscount"
+        v-show="isActivityLinkShow"
+        class="activitybtn"
+        @click="handleClickActivityLink"
       >
         <img
-          src="@/assets/images/global/dialog_btn.png"
-          alt="discount"
+          src="@/assets/images/global/global-activity-link.png"
+          alt="activity"
         />
       </div>
     </transition>
@@ -65,46 +65,46 @@ export default {
 
         const activityPopKey = ref(0);
 
-        const isDiscountShow = ref(false);
+        const isActivityLinkShow = ref(false);
 
-        const discountTimer = ref(null);
+        const activityTimer = ref(null);
 
         const keep = ref(["Home"]);
 
         const loading = computed(() => store.state.isGlobalLoading);
 
-        const handleClickDiscount = () => store.commit(TOGGLE_ACTIVITY_VISIBILITY_M, true);
+        const handleClickActivityLink = () => store.commit(TOGGLE_ACTIVITY_VISIBILITY_M, true);
 
         const [isFill, value, setValue] = useCheckEmailIsFill();
 
         onMounted(async () => {
             // 等待挂载完成
             await nextTick();
-            console.log("=>", "layout mounted all");
+            // console.log("=>", "layout mounted all");
             // 显示折扣信息
-            isDiscountShow.value = true;
+            isActivityLinkShow.value = true;
             // 未填过邮箱 自动打开弹框
             if (!isFill) {
                 //  设置step 1
                 setValue("1");
                 // 延迟打开
-                discountTimer.value = setTimeout(() => {
-                    handleClickDiscount();
+                activityTimer.value = setTimeout(() => {
+                    handleClickActivityLink();
                 }, 1000);
             }
         });
 
         onBeforeUnmount(() => {
             // 清除定时器
-            clearTimeout(discountTimer.value);
+            clearTimeout(activityTimer.value);
         });
 
         return {
             loading,
             keep,
             activityPopKey,
-            isDiscountShow,
-            handleClickDiscount
+            isActivityLinkShow,
+            handleClickActivityLink
         };
     }
 };
@@ -120,7 +120,7 @@ export default {
     .container-main {
         // min-height: 800px;
     }
-    .discountbtn {
+    .activitybtn {
         position: fixed;
         right: 15px;
         bottom: 50px;

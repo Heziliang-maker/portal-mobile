@@ -13,7 +13,7 @@
         <!-- 视频播放按钮 -->
         <img
           v-show="!!dataSource.video && !isView"
-          src="@/assets/images/global/bofang.png"
+          src="@/assets/images/global/global-bofang.png"
           alt="播放该视频"
           @click.stop="handleClickVideoPlayIcon"
         >
