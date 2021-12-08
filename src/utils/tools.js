@@ -12,3 +12,11 @@ export const getPageTitle = (pageTitle) => {
   }
   return `${title}`;
 };
+
+export const useCheckEmailIsFill = () => {
+  const name = "isFill";
+  const value = localStorage.getItem(name);
+  const isFill = value !== null;
+  const setValue = (value) => localStorage.setItem(name, value);
+  return [isFill, value, setValue];
+};

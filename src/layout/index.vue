@@ -30,10 +30,11 @@
       <MenuPop />
     </div>
     <div class="activitypop">
-      <ActivityPop />
+      <ActivityPop :key="activityPopKey" />
     </div>
     <transition name="van-slide-right">
       <div
+        v-show="isDiscountShow"
         class="discountbtn"
         @click="handleClickDiscount"
       >
@@ -52,15 +53,21 @@ import TheFooter from "./components/TheFooter";
 import MenuPop from "@/components/MenuPop";
 import ActivityPop from "@/components/ActivityPop";
 import Loading from "@/components/Loading";
-import { ref, computed, useSlots } from "vue";
+import { ref, computed, onMounted, nextTick, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { TOGGLE_ACTIVITY_VISIBILITY_M } from "@/store/base/mutations";
-
+import { useCheckEmailIsFill } from "@/utils/tools";
 export default {
     name: "Layout",
     components: { TheNav, TheFooter, MenuPop, Loading, ActivityPop },
     setup() {
         const store = useStore();
+
+        const activityPopKey = ref(0);
+
+        const isDiscountShow = ref(false);
+
+        const discountTimer = ref(null);
 
         const keep = ref(["Home"]);
 
@@ -68,9 +75,35 @@ export default {
 
         const handleClickDiscount = () => store.commit(TOGGLE_ACTIVITY_VISIBILITY_M, true);
 
+        const [isFill, value, setValue] = useCheckEmailIsFill();
+
+        onMounted(async () => {
+            // 等待挂载完成
+            await nextTick();
+            console.log("=>", "layout mounted all");
+            // 显示折扣信息
+            isDiscountShow.value = true;
+            // 未填过邮箱 自动打开弹框
+            if (!isFill) {
+                //  设置step 1
+                setValue("1");
+                // 延迟打开
+                discountTimer.value = setTimeout(() => {
+                    handleClickDiscount();
+                }, 1000);
+            }
+        });
+
+        onBeforeUnmount(() => {
+            // 清除定时器
+            clearTimeout(discountTimer.value);
+        });
+
         return {
             loading,
             keep,
+            activityPopKey,
+            isDiscountShow,
             handleClickDiscount
         };
     }
@@ -96,7 +129,8 @@ export default {
         z-index: 99;
 
         > img {
-            width: 102px;
+            // width: 102px;
+            width: 80px;
         }
     }
 }

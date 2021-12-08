@@ -14,7 +14,7 @@
       <div class="activity-main">
         <div
           class="main-1"
-          v-show="step===1"
+          v-show="step == '1'"
         >
           <div class="title">
             <p class="title1">Hey , friend ! </p>
@@ -35,10 +35,6 @@
                 placeholder="Email Address"
               >
                 <template #button>
-                  <!-- <van-button :loading="iconLoading" native-type="submit" loading-type="spinner"
-                              @click="handleSubscribe">
-                    Subscribe
-                  </van-button> -->
                   <button
                     type="submit"
                     @click="handleSubscribe"
@@ -55,7 +51,7 @@
         <transition name="van-slide-right">
           <div
             class="main-2"
-            v-show="step === 2"
+            v-show="step === '2'"
           >
             <div class="title">
               Successfully subscribed ~ !
@@ -101,20 +97,29 @@ import { _promote } from "@/api";
 import { Toast } from "vant";
 import { TOGGLE_ACTIVITY_VISIBILITY_M } from "@/store/base/mutations";
 import { useStore } from "vuex";
+import { useCheckEmailIsFill } from "@/utils/tools";
 export default {
     setup() {
         const store = useStore();
         const state = reactive({
             email: "",
-            step: 1
+            step: "1"
         });
+
+        const [isFill, value, setValue] = useCheckEmailIsFill();
+
+        console.log("useCheckEmailIsFill()=>", useCheckEmailIsFill());
+
+        // 读取step
+        state.step = value;
 
         const handleSubscribe = async () => {
             if (state.email) {
-                // state.iconLoading = true;
                 let res = await _promote.userSubscribe(state.email);
                 if (res.status === "success") {
-                    state.step = 2;
+                    state.step = "2";
+                    setValue("2");
+                    console.log("useCheckEmailIsFill()=>", useCheckEmailIsFill());
                     Toast("Successfully subscribed");
                 } else {
                     Toast(res.errorMsg);
