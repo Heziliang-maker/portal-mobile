@@ -144,7 +144,6 @@ import { UPDATE_LIST_ISVIEW_M } from "@/store/base/mutations";
 export default {
     name: "ProductsSliderItem",
     components: { Score },
-    // inject: ["seriesId"],
     props: {
         dataSource: {
             type: Object,
@@ -168,7 +167,11 @@ export default {
             love: true
         });
 
-        const update = inject("update");
+        const seriesId = inject("seriesId");
+
+        const update = (productUrl) => {
+            store.commit(UPDATE_LIST_ISVIEW_M, { seriesId, productUrl });
+        };
 
         const handleClickVideoPlayIcon = async (index, productUrl) => {
             update(productUrl);

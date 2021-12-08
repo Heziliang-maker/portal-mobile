@@ -10,9 +10,18 @@
   background-color: $container-bg-2;
 }
 // overlay
-.van-popup {
+.van-popup.menu,
+.van-popup.filter {
   width: 300px;
   height: 100%;
   box-sizing: border-box;
   padding: 0 $container-padding;
+}
+.van-popup.activity {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  padding-bottom: 50%;
+  box-sizing: border-box;
+  background-color: transparent;
 }

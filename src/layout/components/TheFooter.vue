@@ -100,13 +100,13 @@
       <div class="content">
         <img
           src="@/assets/images/layout-footer/pay-1.png"
-          alt="visa支付"
+          alt="visa-pay"
         >
         <img
           src="@/assets/images/layout-footer/pay-2.png"
-          alt="visa支付"
+          alt="payc-pay"
         >
-        <img
+        <!-- <img
           src="@/assets/images/layout-footer/pay-3.png"
           alt="visa支付"
         >
@@ -125,7 +125,7 @@
         <img
           src="@/assets/images/layout-footer/pay-7.png"
           alt="visa支付"
-        >
+        > -->
       </div>
     </div>
     <div class="footer-copyright">
@@ -144,7 +144,7 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { nextTick, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -192,10 +192,9 @@ export default {
             activeNames: ["1"]
         });
 
-        const handleClickFoot = (path) => {
+        const handleClickFoot = async (path) => {
             if (path) {
                 router.push(path);
-                state.activeNames = [];
             }
         };
 

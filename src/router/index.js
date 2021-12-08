@@ -43,26 +43,21 @@ const routes = [
         },
       },
 
-      // {
-      //   name: "更多",
-      //   path: "/more",
-      //   component: () => import("@/views/more"),
-      // },
-      // {
-      //   name: "隐私政策",
-      //   path: "/privacy",
-      //   component: () => import("@/views/privacy"),
-      // },
-      // {
-      //   name: "法律条款",
-      //   path: "/terms",
-      //   component: () => import("@/views/terms"),
-      // },
-      // {
-      //   name: "关于我们",
-      //   path: "/about",
-      //   component: () => import("@/views/about"),
-      // },
+      {
+        name: "隐私政策",
+        path: "/privacy",
+        component: () => import("@/views/static-pages/Privacy.vue"),
+      },
+      {
+        name: "法律条款",
+        path: "/terms",
+        component: () => import("@/views/static-pages/Terms.vue"),
+      },
+      {
+        name: "关于我们",
+        path: "/about",
+        component: () => import("@/views/static-pages/AboutUs.vue"),
+      },
     ],
   },
 ];
