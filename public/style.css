@@ -6,15 +6,13 @@
 /* google translate plugin */
 #google_translate_element {
   position: absolute;
-
-  border: 1px solid red;
   left: 50%;
   transform: translateX(-50%);
   top: 7px !important;
   right: 10px !important;
   z-index: 1999 !important;
   opacity: 1;
-  width: 120px;
+  /* width: 154px; */
   height: 33px;
   text-align: center;
 }
