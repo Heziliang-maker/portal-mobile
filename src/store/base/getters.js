@@ -4,5 +4,6 @@
  */
 
 export default {
-
-}
+  ccy: (state) => state.language.ccy,
+  rate: (state) => state.language.rate,
+};

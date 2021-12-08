@@ -166,8 +166,8 @@ export default {
 
         return {
             videoPlayerRef,
-            ccy: computed(() => store.state.ccy),
-            rate: computed(() => store.state.rate),
+            ccy: computed(() => store.getters.ccy),
+            rate: computed(() => store.getters.rate),
             handleClickVideoPlayIcon,
             ...toRefs(state)
         };

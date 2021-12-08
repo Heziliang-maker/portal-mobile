@@ -31,6 +31,8 @@ import loading from "@/utils/loading";
 import installGlobalComponents from "./components/global";
 // =>引入window函数
 import "@/utils/window-func";
+// =>引入翻译插件
+import translatePlugin from "./utils/google-translate";
 
 // 实例初始化
 const app = createApp(App);
@@ -45,8 +47,11 @@ installDirectives(app);
 installGlobalComponents(app);
 
 // 注册全局属性
-// 1.挂载过滤器
+// 挂载过滤器
 app.config.globalProperties.$filter = filters;
+//挂载loading
 app.config.globalProperties.$loading = loading;
+// 挂载翻译插件
+app.config.globalProperties.$translate = translatePlugin;
 
 app.use(store).use(router).mount("#app");

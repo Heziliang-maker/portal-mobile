@@ -53,21 +53,34 @@ import TheFooter from "./components/TheFooter";
 import MenuPop from "@/components/MenuPop";
 import ActivityPop from "@/components/ActivityPop";
 import Loading from "@/components/Loading";
-import { ref, computed, onMounted, nextTick, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, nextTick, onBeforeUnmount, getCurrentInstance, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { TOGGLE_ACTIVITY_VISIBILITY_M } from "@/store/base/mutations";
+import { QUERY_LANGUAGE_A, SELECT_LANGUAGE_A } from "@/store/modules/language";
+console.log("QUERY_LANGUAGE_A=>", QUERY_LANGUAGE_A);
 import { useCheckEmailIsFill } from "@/utils/tools";
+import cookie from "@/utils/cookie";
+
 export default {
     name: "Layout",
     components: { TheNav, TheFooter, MenuPop, Loading, ActivityPop },
     setup() {
+        const { appContext } = getCurrentInstance();
+
         const store = useStore();
 
         const activityPopKey = ref(0);
 
         const isActivityLinkShow = ref(false);
 
+        const state = reactive({
+            // 更改前的语言
+            originLang: ""
+        });
+
         const activityTimer = ref(null);
+
+        const languageTimer = ref(null);
 
         const keep = ref(["Home"]);
 
@@ -76,6 +89,8 @@ export default {
         const handleClickActivityLink = () => store.commit(TOGGLE_ACTIVITY_VISIBILITY_M, true);
 
         const [isFill, value, setValue] = useCheckEmailIsFill();
+
+        const $translate = appContext.config.globalProperties.$translate;
 
         onMounted(async () => {
             // 等待挂载完成
@@ -92,11 +107,33 @@ export default {
                     handleClickActivityLink();
                 }, 1000);
             }
+
+            // 查询语言
+            await store.dispatch(`language/${QUERY_LANGUAGE_A}`, (language) => {
+                //
+                // console.log("查询语言 结果是=>", language);
+                //根据货币 汇率 渲染格式化
+                $translate(language);
+            });
+
+            // 轮询
+            languageTimer.value = setInterval(async () => {
+                // cookie中当前的语言
+                const cookieLang = cookie.get("googtrans");
+
+                if (state.originLang !== cookieLang) {
+                    //触发语言切换
+                    await store.dispatch(`language/${SELECT_LANGUAGE_A}`, cookieLang);
+                    // 替换
+                    state.originLang = cookieLang;
+                }
+            }, 500);
         });
 
         onBeforeUnmount(() => {
             // 清除定时器
             clearTimeout(activityTimer.value);
+            clearInterval(languageTimer.value);
         });
 
         return {
@@ -104,7 +141,8 @@ export default {
             keep,
             activityPopKey,
             isActivityLinkShow,
-            handleClickActivityLink
+            handleClickActivityLink,
+            ...toRefs(state)
         };
     }
 };

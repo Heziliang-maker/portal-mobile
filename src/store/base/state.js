@@ -8,8 +8,7 @@ export default {
   isMenuShow: false,
   isFilterShow: false,
   isActivityShow: false,
-  ccy: "$",
-  rate: 1.2,
+
   bannerList: [],
   seriesList: [],
   seriesIndexList: [],
