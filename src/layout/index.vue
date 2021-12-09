@@ -171,9 +171,6 @@ export default {
         background-color: $container-bg-1;
     }
 
-    .container-main {
-        // min-height: 800px;
-    }
     .activitybtn {
         position: fixed;
         right: 15px;

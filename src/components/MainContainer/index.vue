@@ -5,13 +5,11 @@
 <template>
   <div class="grid">
     <section class="header">
-      <slot name="title">标题</slot>
+      <slot name="title"></slot>
     </section>
     <slot name="brand">
     </slot>
-    <!--  v-if="series.productList.length>0" -->
     <section class="content">
-      <!-- <Grid v-bind="$attrs" /> -->
       <slot name="content"></slot>
     </section>
 
@@ -84,6 +82,7 @@ export default {
 
     .footer {
         text-align: center;
+        font-size: 0;
         .van-button {
             padding-right: 30px;
             padding-left: 30px;

@@ -73,6 +73,8 @@ export default {
                 state.bs = new BScroll(wrapper, {
                     scrollX: true,
                     // probeType: 3,
+                    click: false,
+
                     bounce: true,
                     eventPassthrough: "vertical"
                 });
@@ -96,7 +98,9 @@ export default {
 .container {
     &-wrapper {
         position: relative;
-        padding: $container-padding;
+        padding: $container-padding 0;
+        width: calc(100% - #{$container-padding} * 2);
+        margin: 0 auto;
         white-space: nowrap;
         overflow: hidden;
 
@@ -109,9 +113,9 @@ export default {
                 &:not(:last-of-type) {
                     margin-right: 8px;
                 }
-                &:first-child {
-                    margin-left: 14px;
-                }
+                // &:first-child {
+                //     margin-left: 14px;
+                // }
                 &:last-of-type {
                     margin-right: 14px;
                 }

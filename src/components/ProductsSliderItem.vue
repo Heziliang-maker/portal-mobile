@@ -3,6 +3,12 @@
  * @Description: ProductsSliderItem
 -->
 <template>
+  <!--  v-jumpTo="{url:dataSource.productUrl,type:2,id:dataSource.id,shopId:dataSource.shopId,
+        detailQuery:{
+          productId:dataSource.productId,
+          shopId:dataSource.shopId
+        }
+        }" -->
   <div
     class="slider-item"
     :class="itemClass"
@@ -104,10 +110,10 @@
             v-if="rate&&rate!=1&&ccy!=='$'"
           >≈{{ccy}}
             {{(dataSource.retailPrice*rate).toFixed(2)}}</p>
-          <div
+          <!-- <div
             v-else
             class="gap"
-          ></div>
+          ></div> -->
         </div>
         <!-- <span>
               ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>
@@ -180,18 +186,22 @@ export default {
             };
         };
 
+        const handleClickItem = () => console.log("=>", "............");
+
         return {
             videoPlayerRef,
-            ccy: computed(() => store.state.ccy),
-            rate: computed(() => store.state.rate),
+            ccy: computed(() => store.getters.ccy),
+            rate: computed(() => store.getters.rate),
             badgeStyle: computed(() => {
                 return {
                     index: props.groupIndex * 3 + props.selfIndex,
                     styleVar: { "--before-background-color": ["#FC5443", "#FC9643"][props.selfIndex % 2] }
                 };
             }),
-            itemClass: computed(() => ({ type3: +props.groupIndex % 2 == 0 })),
+            // groupIndex为1 取type3
+            itemClass: computed(() => ({ type3: +props.groupIndex % 2 == 1 })),
             handleClickVideoPlayIcon,
+            handleClickItem,
             ...toRefs(state)
         };
     }
@@ -199,13 +209,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$type2-img-side-length: 160px;
-$type3-img-side-length: 104px;
-$type3-img-height: 104px;
+$type2-img-side-length: 164px;
+$type3-img-side-length: 101px;
+
 $type2-section-left-width: 180px;
-$type3-section-left-width: 116px;
-$type2-pic-padding: 10px;
-$type3-pic-padding: 6px;
+$type3-section-left-width: 117px;
+
+$type2-pic-padding: 8px;
+$type3-pic-padding: 8px;
 
 .slider-item ::v-deep {
     display: flex;
@@ -226,9 +237,7 @@ $type3-pic-padding: 6px;
         @include font-n(13px, $word-color-2);
         word-break: break-all;
         max-width: calc(#{$type2-img-side-length} + #{$type2-pic-padding} * 2);
-
         line-height: 19px;
-        margin-bottom: 2px;
     }
 
     .item-score {
@@ -274,19 +283,24 @@ $type3-pic-padding: 6px;
         }
         .item-pic-col {
             position: absolute;
-            right: 15%;
-            top: 10%;
+            right: 16px;
+            top: 16px;
             z-index: 99;
             width: 28px;
             height: 28px;
-            line-height: 28px;
             text-align: center;
             border-radius: 100%;
             background: $container-bg-0;
             border: 1px solid $border-color-3;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             img {
                 height: 16px;
                 height: 16px;
+                position: relative;
+                transform: translateY(1px);
             }
         }
         .item-pic-play {
@@ -328,12 +342,10 @@ $type3-pic-padding: 6px;
         }
     }
     .item-price {
-        // margin-top: 6px;
         width: 100%;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        margin-bottom: 2px;
         .current {
             .current-price {
                 font-size: 18px;

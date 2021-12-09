@@ -19,7 +19,7 @@
       />
     </section> -->
     <!--   Product Submitbtn -->
-    <section class="product-submitbtn">
+    <section class="product-submitbtn van-hairline--top">
       <div
         class="product-submitbtn__col"
         @click="handleClickColIcon"
@@ -125,6 +125,7 @@ export default {
         width: 28px;
         height: 28px;
         line-height: 28px;
+        box-sizing: border-box;
         text-align: center;
         border-radius: 100%;
         background-color: $container-bg-3;

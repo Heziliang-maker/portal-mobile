@@ -14,7 +14,7 @@
       <BetterScrollView
         key="category"
         :scrollList="categoriesList"
-        targetClass="category"
+        targetClass="categorybox"
         columnKey="name"
       >
         <template #item="{item,index}">
@@ -55,12 +55,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.category {
-    margin-right: 10px;
-    margin-bottom: 10px;
+.maincontainer ::v-deep {
+    .container-wrapper {
+        padding-bottom: 0;
+    }
+    .categorybox {
+        margin-right: 10px;
+        // margin-bottom: 10px;
+        vertical-align: top;
 
-    .category:first-of-type {
-        margin-bottom: 22px;
+        .category:first-of-type {
+            margin-bottom: 22px;
+        }
     }
 }
 </style>

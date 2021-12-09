@@ -10,15 +10,13 @@
     :showFooter="false"
   >
     <template #title>
-      Top Brand
     </template>
-
     <template #brand>
       <section class="brand">
         <div class="brand-banner">
           <van-image
             @click="handleClickClassifyBannerImg"
-            fit="contain"
+            fit="cover"
             src="http://buykop-ap.prd.buykop.com/images/2021-08-25/2/fd4225c5f19a45d0b599e80424b624f3.png"
           >
           </van-image>
@@ -32,16 +30,14 @@
         </div>
       </section>
     </template>
-
-    <template
-      name='content'
-      v-if="series.productList.length>0"
-    >
+    <!--    v-if="series.productList.length>0" -->
+    <template #content>
+      <!--         :scrollList="series.productList" -->
       <BetterScrollView
-        key="slider"
+        key="brand-slider"
         class="scorllview"
-        :scrollList="series.productList"
         targetClass="box"
+        :scrollList="scrollList"
         columnKey="productUrl"
       >
         <template #item="{item,index}">
@@ -72,6 +68,55 @@ export default {
         const state = reactive({
             scrollList: []
         });
+        setTimeout(() => {
+            state.scrollList = [
+                {
+                    ccy: "USD",
+                    productId: "617",
+                    productImg:
+                        "http://buykop.oss-cn-shanghai.aliyuncs.com/images/2021-06-24/1175/c54cff9ce1214e40a06bc200644c79ff.jpg",
+                    productName: "iPad Pro 11 inch",
+                    productSort: 5,
+                    productUrl: "https://apple.dev.buykop.com/system/detail/617?buykopPortal=4",
+                    reamt: 1187.96,
+                    retailPrice: 1052.18,
+                    shopId: "+ebKAcmQ4SDdKiela9SUpg==",
+                    starLevel: 3.5,
+                    video: null,
+                    videoCover: null
+                },
+                {
+                    ccy: "USD",
+                    productId: "617",
+                    productImg:
+                        "http://buykop.oss-cn-shanghai.aliyuncs.com/images/2021-06-24/1175/c54cff9ce1214e40a06bc200644c79ff.jpg",
+                    productName: "iPad Pro 11 inch",
+                    productSort: 5,
+                    productUrl: "https://apple.dev.buykop.com/system/detail/617?buykopPortal=4",
+                    reamt: 1187.96,
+                    retailPrice: 1052.18,
+                    shopId: "+ebKAcmQ4SDdKiela9SUpg==",
+                    starLevel: 3.5,
+                    video: null,
+                    videoCover: null
+                },
+                {
+                    ccy: "USD",
+                    productId: "617",
+                    productImg:
+                        "http://buykop.oss-cn-shanghai.aliyuncs.com/images/2021-06-24/1175/c54cff9ce1214e40a06bc200644c79ff.jpg",
+                    productName: "iPad Pro 11 inch",
+                    productSort: 5,
+                    productUrl: "https://apple.dev.buykop.com/system/detail/617?buykopPortal=4",
+                    reamt: 1187.96,
+                    retailPrice: 1052.18,
+                    shopId: "+ebKAcmQ4SDdKiela9SUpg==",
+                    starLevel: 3.5,
+                    video: null,
+                    videoCover: null
+                }
+            ];
+        }, 800);
 
         const store = useStore();
 
@@ -91,7 +136,8 @@ export default {
 
         return {
             handleClickClassifyBannerImg,
-            series
+            series,
+            ...toRefs(state)
         };
     }
 };
@@ -99,21 +145,26 @@ export default {
 
 <style lang="scss" scoped>
 .maincontainer ::v-deep {
+    .container-wrapper {
+        padding-bottom: 0;
+    }
     .brand {
         padding: 0 $container-padding;
-        // margin: calc(#{$container-padding} / 2) 0 $container-padding;
-        margin-top: calc(#{$container-padding} / 2);
         .brand-banner {
             height: auto;
-
-            margin-bottom: calc(#{$container-padding} / 2);
-            .van-image img {
+            font-size: 0;
+            // margin-bottom: calc(#{$container-padding} / 2);
+            .van-image {
+                width: 100%;
+                height: 188px;
+            }
+            img {
                 border-radius: $radius;
             }
         }
         .brand-name {
             @include font-b(20px);
-            margin-bottom: calc(#{$container-padding} / 2);
+            margin: calc(#{$container-padding} / 2) 0;
             line-height: 24px;
         }
         .brand-desc {

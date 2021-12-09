@@ -13,7 +13,7 @@
     </template>
     <template #content>
       <BetterScrollView
-        key="slider"
+        key="slider-simple"
         class="scorllview"
         :scrollList="series.productList"
         targetClass="box"
@@ -77,7 +77,7 @@ export default {
         // width: 200px;
         vertical-align: top;
         & > div {
-            margin-bottom: $slider-padding-h;
+            margin-bottom: 8px;
         }
         & > div:last-of-type {
             margin-bottom: 0;

@@ -86,7 +86,7 @@ export default {
             // console.log("res=>", result.data);
         };
 
-        watch(() => [state.filter, state.asc, route.query], watchFunc, { immediate: true });
+        watch(() => [state.filter, state.asc, route.query], watchFunc, { immediate: true, deep: true });
 
         return {
             options,
@@ -137,7 +137,8 @@ export default {
         display: none;
     }
     .van-dropdown-menu__bar {
-        box-shadow: 0 3px 6px rgba(100, 101, 102, 0.12);
+        // box-shadow: 0 3px 6px rgba(100, 101, 102, 0.12);
+        box-shadow: none;
         // box-shadow
     }
 }

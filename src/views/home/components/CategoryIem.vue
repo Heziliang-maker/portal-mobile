@@ -13,7 +13,7 @@
         alt=""
       >
     </div>
-    <div class="category-name">
+    <div class="category-name van-multi-ellipsis--l2">
       {{dataSource.classifyName}}
     </div>
   </div>
@@ -61,9 +61,11 @@ export default {
 <style lang="scss" scoped>
 .category {
     width: 70px;
+    height: 98px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .category-pic {
         width: 58px;
         height: 58px;

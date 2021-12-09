@@ -9,7 +9,8 @@
 -->
 <template>
   <div
-    class="nav"
+    ref="navRef"
+    class="nav van-hairline--bottom"
     :class="{'show':isBackShow}"
   >
     <div
@@ -83,9 +84,11 @@ import { computed, reactive, toRefs, ref, nextTick } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { TOGGLE_MENU_VISIBILITY_M, SET_SEARCHVALUE } from "@/store/base/mutations";
-
+import { useClickAway } from "@vant/use";
 export default {
     setup() {
+        const navRef = ref(null);
+
         const route = useRoute();
 
         const router = useRouter();
@@ -99,6 +102,10 @@ export default {
 
         const searchInputRef = ref(null);
 
+        useClickAway(navRef, () => {
+            if (state.isSearchActive) state.isSearchActive = false;
+        });
+
         // 菜单
         const handleClickMenuIcon = () => {
             store.commit(TOGGLE_MENU_VISIBILITY_M, true);
@@ -109,13 +116,13 @@ export default {
         };
         // 搜索
         const handleClickSearchIcon = async () => {
-            if (state.isSearchActive) {
-                state.isSearchActive = false;
-            } else {
-                state.isSearchActive = true;
-                await nextTick();
-                searchInputRef.value.focus();
-            }
+            // if (!state.isSearchActive) {
+            //     state.isSearchActive = true;
+            //     await nextTick();
+            //     searchInputRef.value.focus();
+            // }
+
+            state.isSearchActive = !state.isSearchActive;
         };
         // 返回
         const handleClickBackIcon = () => router.back();
@@ -138,8 +145,10 @@ export default {
             });
         };
         // 搜索 失焦
-        const onBlur = () => {
+        const onBlur = async () => {
+            console.log("=>", "..");
             // onSearch(state.searchValue);
+            await nextTick();
             state.isSearchActive = false;
         };
 
@@ -159,6 +168,7 @@ export default {
             onSearch,
             onBlur,
             searchInputRef,
+            navRef,
             ...toRefs(state)
         };
     }
@@ -183,6 +193,8 @@ export default {
     padding: 8px 16px;
     box-sizing: border-box;
     background-color: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+    height: $nav-height;
 
     .svgicon {
         width: 24px;

@@ -46,6 +46,7 @@ function cb({ url, type, id, detailQuery }) {
 
 export default function (el, binding) {
   el.onclick = function () {
+    console.log("=>", "...");
     cb(binding.value);
   };
 }

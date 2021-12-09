@@ -291,6 +291,7 @@ export default {
             margin-bottom: 16px;
         }
         .content {
+            font-size: 0;
             img {
                 width: 42px;
                 margin-right: 6px;

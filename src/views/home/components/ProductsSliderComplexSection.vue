@@ -13,7 +13,7 @@
     </template>
     <template #content>
       <BetterScrollView
-        key="slider"
+        key="slider-complex"
         class="scorllview"
         :scrollList="series.productList"
         targetClass="box"

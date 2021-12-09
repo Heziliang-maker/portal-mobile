@@ -15,7 +15,7 @@
     <div class="menu-icon">
       <van-icon
         name="arrow"
-        size="8"
+        size="16"
         :color="variables.iconColorGray"
       />
     </div>
@@ -76,7 +76,7 @@ export default {
 
     .menu-main {
         flex: 1 0 auto;
-        @include font-n();
+        @include font-n(15px);
         line-height: 20px;
     }
     .menu-icon {
@@ -85,6 +85,7 @@ export default {
 
         .van-icon {
             line-height: 20px;
+            font-size: 16px !important;
         }
     }
 }

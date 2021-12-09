@@ -12,7 +12,7 @@
     </template>
     <template #content>
       <ProductsGrid
-        class="grid"
+        class="vangrid"
         :grid-list="series.productList"
       >
         <template #item="{item}">
@@ -64,7 +64,13 @@ export default {
 
 
 <style lang="scss" scoped>
-.grid {
-    margin-bottom: $grid-padding-h;
+.grid ::v-deep {
+    .vangrid {
+        margin-top: $grid-padding-h;
+    }
+
+    .footer {
+        margin-top: 16px;
+    }
 }
 </style>

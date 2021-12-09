@@ -89,10 +89,15 @@
     <!-- 商品名称 -->
     <div class="product-name">{{ dataSource.name }}</div>
     <!-- 商品评分 -->
-    <div class="product-score">
-      <Score
+    <!--  <Score
         v-show="!!dataSource.star"
         v-model="dataSource.star"
+        :size="14"
+        readonly
+      /> -->
+    <div class="product-score">
+      <Score
+        :value='3'
         :size="14"
         readonly
       />
@@ -170,7 +175,7 @@
       <div class="product-brand__official">Brand Official Website</div>
     </div>
     <!-- gutter -->
-    <div class="gutter"></div>
+    <!-- <div class="gutter"></div> -->
     <!-- ralated grids -->
 
   </div>
@@ -319,7 +324,7 @@ export default {
     align-items: center;
 
     .product-main {
-        margin-bottom: 8px;
+        // margin-bottom: 8px;
         position: relative;
         // 悬浮视频播放按钮
         .product-main-icon {
@@ -336,6 +341,10 @@ export default {
         }
         .product-main-swipe {
             width: 375px;
+            .van-swipe-item {
+                width: 375px;
+                height: 375px;
+            }
             .van-image {
                 width: 375px;
                 height: 375px;
@@ -374,11 +383,10 @@ export default {
         width: 100%;
         box-sizing: border-box;
 
-        .product-slide__item {
-            border: 1px solid $theme-color;
-            padding: 1px;
-            border-radius: 4px;
+        .container-wrapper {
+            padding-top: 8px;
         }
+
         .slide {
             margin-right: 8px;
         }
@@ -387,10 +395,10 @@ export default {
         }
 
         .product-slide__item {
+            border: 1px solid #e3e3e3;
             width: 56px;
             height: 56px;
             box-sizing: border-box;
-            border: 1px solid transparent;
             padding: 1px;
             border-radius: 4px;
         }
@@ -399,19 +407,19 @@ export default {
         }
     }
     .product-name {
-        margin-bottom: 2px;
         @include font-b(18px);
         padding: 0 $container-padding;
         line-height: 27px;
         align-self: flex-start;
     }
     .product-score {
+        margin-top: 2px;
         padding: 0 $container-padding;
         align-self: flex-start;
     }
     .product-price {
         width: 100%;
-        margin: 9px 0 25px;
+        margin: 8px 0 24px;
         padding: 0 $container-padding;
         align-self: flex-start;
         box-sizing: border-box;
@@ -467,7 +475,7 @@ export default {
         box-sizing: border-box;
         justify-content: flex-start;
         align-items: center;
-        padding: $container-padding;
+        padding: 0 $container-padding;
 
         $title-width: 45px;
         $gap: $container-padding;
@@ -505,6 +513,7 @@ export default {
         .product-sku__item.active {
             border-color: $theme-color;
             color: $theme-color;
+            background-color: #fff6f1;
         }
     }
     .product-brand {

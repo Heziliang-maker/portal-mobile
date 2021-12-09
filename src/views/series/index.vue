@@ -15,7 +15,11 @@
     <!-- gutter -->
     <div class="gutter"></div>
     <!-- main -->
-    <div class="series-main">
+
+    <div
+      class="series-main"
+      v-if="productList.length>0"
+    >
       <MainContainer :showFooter="false">
         <template #title>
           {{name}}
@@ -32,6 +36,12 @@
         </template>
       </MainContainer>
     </div>
+    <!-- 通用错误 -->
+    <van-empty
+      v-else
+      image="error"
+      description="暂无商品"
+    />
   </div>
 </template>
 
@@ -71,6 +81,7 @@ export default {
         provide("seriesId", seriesId);
 
         const onLoad = ({ data, name }) => {
+            console.log("=>", "load");
             state.productList = data;
             state.name = name;
             state.isLoading = false;
@@ -88,4 +99,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.series ::v-deep {
+    .series-main .grid .header {
+        margin-bottom: 8px;
+    }
+}
 </style>

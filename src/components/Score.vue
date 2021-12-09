@@ -32,8 +32,9 @@ export default {
 
 <style lang="scss" scoped>
 .score {
-    line-height: 18px;
-    margin: 6px 0;
+    line-height: 10px;
+    // margin: 6px 0;
+    margin-top: 2px;
 }
 .score-star {
     margin-right: 5px;

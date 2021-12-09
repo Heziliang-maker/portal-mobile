@@ -47,6 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .banner-swiper ::v-deep {
+    border-radius: $radius;
     .van-swipe-item {
         height: 180px;
         width: 345px;

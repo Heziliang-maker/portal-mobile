@@ -4,6 +4,7 @@
 -->
 
 <template>
+  <div class="gap"></div>
   <section class="banner">
     <BannerSwiper />
   </section>
@@ -11,10 +12,14 @@
   <section class="new-week">
     <ProductsGridSection :series-id="1" />
   </section>
+  <!-- gutter -->
+  <div class="gutter"></div>
   <!-- hot-new -->
   <section class="hot-new">
     <ProductsSliderSection :series-id="2" />
   </section>
+  <!-- gutter -->
+  <div class="gutter"></div>
   <!-- clothing -->
   <section class="outdoor-garden">
     <ProductsSliderComplexSection :series-id="1" />
@@ -25,19 +30,27 @@
   <section class="shop-categories">
     <CategoriesSection />
   </section>
+
   <!-- gutter -->
   <div class="gutter"></div>
   <!-- clothing -->
   <section class="outdoor-garden">
     <ProductsGridSection :series-id="4" />
   </section>
+  <!-- gutter -->
+  <div class="gutter"></div>
   <!-- clothing -->
   <section class="top-brand">
+    <div class="top-brand__title">
+      Top Brand
+    </div>
     <ProductsSliderBrandSection :series-id="7" />
+    <ProductsSliderBrandSection :series-id="8" />
+    <ProductsSliderBrandSection :series-id="9" />
   </section>
   <!-- clothing -->
   <section class="top-brand">
-    <ProductsSliderBrandSection :series-id="8" />
+
   </section>
   <!-- electronic -->
   <!-- <section class="outdoor-garden">
@@ -126,19 +139,41 @@ export default {
 
 
 <style lang="scss" scoped>
+.gap {
+    height: 1px;
+    background-color: $container-bg-2;
+}
 .banner {
+    position: relative;
     width: 100%;
     padding: $container-padding;
     box-sizing: border-box;
     background-color: $container-bg-2;
+    // 遮挡阴影
+    &::before {
+        content: "";
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #f6f6f6;
+    }
 }
 .new-week {
-    margin-top: $grid-padding-h;
+    // margin-top: $grid-padding-h;
 }
 .hot-new {
-    margin-top: $grid-padding-h;
+    // margin-top: $grid-padding-h;
 }
 .shop-categories {
-    margin-top: $grid-padding-h;
+    // margin-top: $grid-padding-h;
+}
+.top-brand__title {
+    @include font-b(20px);
+    line-height: 29px;
+    margin-left: $container-padding;
+    margin-top: $container-padding;
 }
 </style>

@@ -56,14 +56,20 @@ export default {
 
     const slideTotalList = seriesList[1].productList;
     seriesList[1].productList = [
-      slideTotalList.slice(0, 3),
-      slideTotalList.slice(3, 5),
+      slideTotalList.slice(0, 2),
+      slideTotalList.slice(2, 5),
     ];
     // 封装数组2
-    state.categoriesList = seriesList.reduce((pre, cur, index) => {
-      const lastIndex = seriesList.length - 1 - index;
+    const categoriesList = seriesList.filter(
+      (series) => ![7, 8, 9].includes(series.classifyId)
+    );
 
-      return index > lastIndex ? pre : [...pre, [cur, seriesList[lastIndex]]];
+    state.categoriesList = categoriesList.reduce((pre, cur, index) => {
+      const lastIndex = categoriesList.length - 1 - index;
+
+      return index > lastIndex || index == lastIndex
+        ? pre
+        : [...pre, [cur, categoriesList[lastIndex]]];
     }, []);
   },
   [QUERY_PORTAL_SERIES_M](state, payload) {

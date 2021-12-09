@@ -6,6 +6,12 @@
   <div
     class="grid-item"
     :class="{'complex':complex}"
+    v-jumpTo="{url:dataSource.productUrl,type:2,id:dataSource.id,shopId:dataSource.shopId,
+        detailQuery:{
+          productId:dataSource.productId,
+          shopId:dataSource.shopId
+        }
+        }"
   >
     <div class="item-pic">
       <!-- 视频播放按钮 -->
@@ -88,10 +94,10 @@
           v-if="rate&&rate!=1&&ccy!=='$'"
         >≈{{ccy}}
           {{(dataSource.retailPrice*rate).toFixed(2)}}</p>
-        <div
+        <!-- <div
           v-else
           class="gap"
-        ></div>
+        ></div> -->
       </div>
       <p
         class="origin"
@@ -180,11 +186,11 @@ $img-side-length: 158px;
 $complex-img-side-length: 132px;
 $padding: 8px;
 
-.grid-item {
+.grid-item ::v-deep {
     .item-pic {
         background-color: $container-bg-2;
         overflow: hidden;
-        margin-bottom: 7px;
+        margin-bottom: $padding;
         padding: $padding;
         box-sizing: border-box;
         width: 100%;
@@ -193,6 +199,9 @@ $padding: 8px;
             height: $img-side-length;
             border-radius: $radius;
             background-color: $container-bg-0;
+            img {
+                border-radius: $radius;
+            }
         }
     }
     .item-name {
@@ -202,11 +211,12 @@ $padding: 8px;
         font-size: 12px;
         @include font-n(13px, $word-color-2);
         line-height: 17px;
-        margin-bottom: 2px;
+
         // word-break: break-all;
     }
 
     .item-score {
+        margin-top: 2px;
         // margin-bottom: 8px;
     }
     .item-pic {
@@ -217,20 +227,24 @@ $padding: 8px;
         border-radius: $radius;
         .item-pic-col {
             position: absolute;
-            right: 15%;
-            top: 10%;
+            right: 16px;
+            top: 16px;
             z-index: 99;
             width: 28px;
             height: 28px;
-
             text-align: center;
             border-radius: 100%;
             background: $container-bg-0;
             border: 1px solid $border-color-3;
             line-height: 28px;
             font-size: 0;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            justify-content: center;
             img {
-                vertical-align: middle;
+                position: relative;
+                transform: translateY(1px);
                 height: 16px;
                 height: 16px;
             }
@@ -279,7 +293,7 @@ $padding: 8px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        margin-bottom: 2px;
+        // margin-bottom: 2px;
         .current {
             .current-price {
                 font-size: 18px;
