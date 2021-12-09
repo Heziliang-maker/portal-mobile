@@ -17,7 +17,7 @@
   </section>
   <!-- clothing -->
   <section class="outdoor-garden">
-    <ProductsSliderComplexSection :series-id="7" />
+    <ProductsSliderComplexSection :series-id="1" />
   </section>
   <!-- gutter -->
   <div class="gutter"></div>
@@ -27,35 +27,42 @@
   </section>
   <!-- gutter -->
   <div class="gutter"></div>
-
   <!-- clothing -->
   <section class="outdoor-garden">
     <ProductsGridSection :series-id="4" />
   </section>
+  <!-- clothing -->
+  <section class="top-brand">
+    <ProductsSliderBrandSection :series-id="7" />
+  </section>
+  <!-- clothing -->
+  <section class="top-brand">
+    <ProductsSliderBrandSection :series-id="8" />
+  </section>
   <!-- electronic -->
-  <section class="outdoor-garden">
+  <!-- <section class="outdoor-garden">
     <ProductsGridSection :series-id="5" />
-  </section>
+  </section> -->
   <!-- outdoor-garden -->
-  <section class="outdoor-garden">
+  <!-- <section class="outdoor-garden">
     <ProductsGridSection :series-id="6" />
-  </section>
+  </section> -->
   <!-- outdoor-garden -->
-  <section class="outdoor-garden">
+  <!-- <section class="outdoor-garden">
     <ProductsGridSection :series-id="7" />
-  </section>
+  </section> -->
   <!-- outdoor-garden -->
-  <section class="outdoor-garden">
+  <!-- <section class="outdoor-garden">
     <ProductsGridSection :series-id="8" />
-  </section>
+  </section> -->
   <!-- outdoor-garden -->
-  <section class="outdoor-garden">
+  <!-- <section class="outdoor-garden">
     <ProductsGridSection :series-id="9" />
-  </section>
+  </section> -->
   <!-- outdoor-garden -->
-  <section class="outdoor-garden">
+  <!-- <section class="outdoor-garden">
     <ProductsGridSection :series-id="10" />
-  </section>
+  </section> -->
 </template>
 
 
@@ -63,10 +70,17 @@
 import { reactive, provide, computed, toRefs, onMounted, nextTick, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import { _product } from "@/api";
+// 轮播展示
 import BannerSwiper from "./components/BannerSwiper";
+//  商品宫格展示
 import ProductsGridSection from "./components/ProductsGridSection.vue";
+// 商品滚动展示
 import ProductsSliderSection from "./components/ProductsSliderSection.vue";
+// 商品滚动特殊展示
 import ProductsSliderComplexSection from "./components/ProductsSliderComplexSection.vue";
+// 品牌+ 商品滚动展示
+import ProductsSliderBrandSection from "./components/ProductsSliderBrandSection.vue";
+// 分类展示
 import CategoriesSection from "./components/CategoriesSection.vue";
 import { QUERY_PORTAL_A } from "@/store/base/actions";
 export default {
@@ -76,6 +90,7 @@ export default {
         ProductsGridSection,
         ProductsSliderSection,
         ProductsSliderComplexSection,
+        ProductsSliderBrandSection,
         CategoriesSection
     },
     setup() {

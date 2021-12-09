@@ -206,7 +206,7 @@ export default {
 <style lang="scss" scoped>
 .footer ::v-deep {
     background: $footer-bg;
-    margin-top: 8px;
+    // margin-top: 8px;
     width: 100%;
     // 信息
     .footer-info {

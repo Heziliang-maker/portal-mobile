@@ -6,6 +6,7 @@
 <template>
   <!-- container -->
   <div id="container">
+    <div class="container-trans"></div>
     <!-- header -->
     <div class="container-header">
       <van-sticky>
@@ -34,7 +35,7 @@
     </div>
     <transition name="van-slide-right">
       <div
-        v-show="isActivityLinkShow"
+        v-show="isActivityLinkAble && isActivityLinkShow"
         class="activitybtn"
         @click="handleClickActivityLink"
       >
@@ -55,6 +56,7 @@ import ActivityPop from "@/components/ActivityPop";
 import Loading from "@/components/Loading";
 import { ref, computed, onMounted, nextTick, onBeforeUnmount, getCurrentInstance, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import { TOGGLE_ACTIVITY_VISIBILITY_M } from "@/store/base/mutations";
 import { QUERY_LANGUAGE_A, SELECT_LANGUAGE_A } from "@/store/modules/language";
 console.log("QUERY_LANGUAGE_A=>", QUERY_LANGUAGE_A);
@@ -69,9 +71,17 @@ export default {
 
         const store = useStore();
 
+        const route = useRoute();
+
         const activityPopKey = ref(0);
 
         const isActivityLinkShow = ref(false);
+
+        const isActivityLinkAble = computed(() => {
+            const { path } = route;
+            const blackList = ["/detail", "/series"];
+            return !blackList.includes(path);
+        });
 
         const state = reactive({
             // 更改前的语言
@@ -142,6 +152,7 @@ export default {
             activityPopKey,
             isActivityLinkShow,
             handleClickActivityLink,
+            isActivityLinkAble,
             ...toRefs(state)
         };
     }
@@ -149,11 +160,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 #container ::v-deep {
-    @include DEBUG;
-    padding-top: $trans-height;
+    // @include DEBUG;
+    // padding-top: $trans-height;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: $container-bg-0;
+
+    .container-trans {
+        height: $trans-height;
+        background-color: $container-bg-1;
+    }
 
     .container-main {
         // min-height: 800px;

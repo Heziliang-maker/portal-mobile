@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.grid {
+    margin-top: $container-padding;
+}
 .maincontainer ::v-deep {
     position: relative;
     background: red;
@@ -76,6 +79,7 @@ export default {
     background-position: right bottom;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-bottom: 24px;
     .scorllview {
     }
     .box {
@@ -94,10 +98,12 @@ export default {
     .content * {
         color: $word-color-0 !important;
     }
-    .footer .van-button {
-        color: $word-color-0 !important;
-        border-color: $word-color-0 !important;
-        background: none;
+    .footer {
+        .van-button {
+            color: $word-color-0 !important;
+            border-color: $word-color-0 !important;
+            background: none;
+        }
     }
 }
 

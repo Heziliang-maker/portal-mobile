@@ -47,13 +47,14 @@ export default {
 
         provide("seriesId", props.seriesId);
 
-
         return {
             series: computed(
                 () =>
                     store.state.seriesList.find((series) => series.classifyId === props.seriesId) || {
                         classifyName: "",
-                        productList: []
+                        productList: [],
+                        classifyInfo: "",
+                        classifyBannerImg: ""
                     }
             )
         };

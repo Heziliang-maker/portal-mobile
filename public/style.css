@@ -9,7 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   top: 7px !important;
-  right: 10px !important;
+  /* right: 10px !important; */
   z-index: 1999 !important;
   opacity: 1;
 

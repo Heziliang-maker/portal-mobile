@@ -21,6 +21,7 @@ module.exports = {
   devServer: {
     port: 9527,
     open: true,
+    public: "192.168.5.167:9527",
     proxy: {
       "^/shop-admin/v1": {
         target: "http://106.15.62.70:17804/",

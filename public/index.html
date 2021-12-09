@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="<%= BASE_URL %>style.css" />
   </head>
   <body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.9.0/vconsole.min.js"></script>
+    <script>
+      // init vConsole
+      var vConsole = new VConsole();
+
+      console.log("Hello world");
+
+      setTimeout(() => {
+        document.getElementById("__vconsole").classList.add("notranslate");
+      }, 1000);
+    </script>
     <noscript>
       <strong
         >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work

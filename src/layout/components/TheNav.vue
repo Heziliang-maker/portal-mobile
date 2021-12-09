@@ -145,7 +145,7 @@ export default {
 
         return {
             isBackShow: computed(() => {
-                const whiteList = ["/detail", "/terms", "/privacy", "/about"];
+                const whiteList = ["/detail", "/terms", "/privacy", "/about", "/series"];
                 const path = route.path;
                 return whiteList.includes(path);
             }),

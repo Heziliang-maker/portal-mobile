@@ -7,6 +7,9 @@
     <section class="header">
       <slot name="title">标题</slot>
     </section>
+    <slot name="brand">
+    </slot>
+    <!--  v-if="series.productList.length>0" -->
     <section class="content">
       <!-- <Grid v-bind="$attrs" /> -->
       <slot name="content"></slot>
@@ -42,7 +45,8 @@ export default {
             default: true
         },
         series: {
-            type: Object
+            type: Object,
+            default: () => ({ classifyName: "", classifyId: "", productList: [] })
         }
     },
     setup(props, context) {
@@ -77,6 +81,7 @@ export default {
         line-height: 29px;
         margin-left: $container-padding;
     }
+
     .footer {
         text-align: center;
         .van-button {
